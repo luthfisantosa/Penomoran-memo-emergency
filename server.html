@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Manajemen Penomoran Surat</title>
+    <style>
+        /* =========================================
+           1. CSS VARIABLES (Mudah untuk dimodifikasi)
+           ========================================= */
+        :root {
+            --sap-blue: #003366;
+            --sap-accent: #007cc0;
+            --sap-bg: #f0f2f5;
+            --input-uraian-width: 400px;
+            --input-ket-width: 250px;
+            --border-color: #dcdcdc;
+        }
+
+        /* =========================================
+           2. GLOBAL & LAYOUT
+           ========================================= */
+        body { font-family: "Segoe UI", sans-serif; background-color: var(--sap-bg); margin: 0; padding: 20px; }
+        .sap-container { background-color: white; border: 1px solid var(--border-color); max-width: 1200px; margin: auto; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .sap-header { background-color: var(--sap-blue); color: white; padding: 15px 20px; font-weight: bold; border-bottom: 3px solid var(--sap-accent); }
+        
+        /* =========================================
+           3. TOOLBAR & FORM
+           ========================================= */
+        .sap-toolbar { background-color: #f8f9fa; padding: 15px 20px; border-bottom: 1px solid var(--border-color); display: flex; flex-wrap: wrap; gap: 10px; }
+        input { padding: 6px; border: 1px solid #999; border-radius: 0; }
+        .btn-sap { background-color: var(--sap-accent); color: white; border: none; padding: 8px 15px; cursor: pointer; font-weight: bold; }
+        .btn-delete { background-color: #d9534f; color: white; border: none; padding: 4px 8px; cursor: pointer; font-size: 11px; }
+
+        /* =========================================
+           4. TABLE STYLES
+           ========================================= */
+        table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        th { background-color: #e5e9ed; padding: 10px; border: 1px solid #ccc; font-size: 12px; cursor: pointer; text-align: left; }
+        td { padding: 8px; border: 1px solid #ccc; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        tr:hover { background-color: #e8f0fe; }
+    </style>
+</head>
+<body>
+
+<div class="sap-container">
+    <div class="sap-header">Manajemen Penomoran Surat - PPBJE/D2350</div>
+    
+    <div class="sap-toolbar">
+        <form id="inputForm" style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <input type="text" id="inUraian" placeholder="Uraian Isi" style="width: var(--input-uraian-width);" required>
+            <input type="date" id="inTanggal">
+            <input type="text" id="inPR" placeholder="No. PR">
+            <input type="text" id="inSR" placeholder="SR">
+            <input type="text" id="inKet" placeholder="Keterangan" style="width: var(--input-ket-width);">
+            <button type="submit" class="btn-sap">Save</button>
+        </form>
+    </div>
+
+    <table id="tabelSurat">
+        <thead>
+            <tr>
+                <th style="width:40px" onclick="sortTable('NO')">NO</th>
+                <th style="width:180px" onclick="sortTable('NOMOR SURAT')">NOMOR SURAT</th>
+                <th>URAIAN</th>
+                <th style="width:100px" onclick="sortTable('TANGGAL TERBIT')">TGL</th>
+                <th style="width:120px">AKSI</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+
+    <div class="sap-footer" style="padding: 15px; display:flex; justify-content:center; gap:10px;">
+        <button onclick="changePage(-1)" class="btn-sap">Prev</button>
+        <select id="pageJump" onchange="jumpToPage(this.value)" style="padding:5px;"></select>
+        <button onclick="changePage(1)" class="btn-sap">Next</button>
+    </div>
+</div>
+
+<script>
+    let dataGlobal = [];
+    let currentPage = 1;
+    let sortConfig = { key: 'NOMOR SURAT', direction: 'desc' };
+    const rowsPerPage = 10;
+
+    // --- UTILS ---
+    function extractNum(str) { return parseInt(str.split('/')[0]) || 0; }
+    function getLatestSequence() { 
+        let maxNo = 0; 
+        dataGlobal.forEach(d => { const num = extractNum(d["NOMOR SURAT"]); if(num > maxNo) maxNo = num; }); 
+        return maxNo + 1; 
+    }
+
+    async function loadData() {
+        try {
+            //const response = await fetch('rekap_surat_data.json'); //<----- data offline ------>
+             const response = await fetch('https://script.google.com/macros/s/AKfycbyyKqsN_0IlvyGreq4NzpTdceCdITQXeYW_QFmLIry-i6qc0EbwYS1DiJ9OSh_oRYM0/exec');
+            
+            dataGlobal = await response.json();
+            applySort();
+        } catch (e) { console.error("Error", e); }
+    }
+
+    function renderTable() {
+        const tableBody = document.getElementById('tableBody');
+        tableBody.innerHTML = '';
+        
+        const totalPages = Math.ceil(dataGlobal.length / rowsPerPage);
+        const paginatedData = dataGlobal.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
+
+        paginatedData.forEach((item, idx) => {
+            const actualIdx = ((currentPage - 1) * rowsPerPage) + idx;
+            tableBody.innerHTML += `<tr>
+                <td>${item["NO"]}</td>
+                <td>${item["NOMOR SURAT"]}</td>
+                <td>${item["URAIAN ISI INFORMASI"]}</td>
+                <td>${item["TANGGAL TERBIT"]}</td>
+                <td>
+                    <button style="padding:4px 8px; font-size:11px;" onclick="openEdit(${actualIdx})">Edit</button>
+                    <button class="btn-delete" onclick="deleteRow(${actualIdx})">Delete</button>
+                </td>
+            </tr>`;
+        });
+
+        const jump = document.getElementById('pageJump');
+        jump.innerHTML = Array.from({length: totalPages}, (_, i) => `<option value="${i+1}" ${i+1===currentPage?'selected':''}>Halaman ${i+1}</option>`).join('');
+    }
+
+    // --- ACTIONS ---
+    function deleteRow(idx) {
+        if(confirm("Yakin ingin menghapus data ini?")) {
+            dataGlobal.splice(idx, 1);
+            applySort();
+        }
+    }
+
+    document.getElementById('inputForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const d = new Date(document.getElementById('inTanggal').value);
+        const nextNo = getLatestSequence();
+        
+        dataGlobal.unshift({
+            "NO": nextNo,
+            "NOMOR SURAT": `${nextNo}/PPBJE/D2350/${['','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'][d.getMonth()+1]}/${d.getFullYear()}`,
+            "URAIAN ISI INFORMASI": document.getElementById('inUraian').value,
+            "TANGGAL TERBIT": `${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear()}`,
+            "NO PR": document.getElementById('inPR').value || '-',
+            "SR": document.getElementById('inSR').value || '-',
+            "KETERANGAN": document.getElementById('inKet').value || '-'
+        });
+        this.reset();
+        applySort();
+    });
+
+    // --- SORTING ---
+    function applySort() {
+        dataGlobal.sort((a, b) => {
+            let valA = a[sortConfig.key], valB = b[sortConfig.key];
+            if (sortConfig.key === 'NOMOR SURAT') { valA = extractNum(valA); valB = extractNum(valB); }
+            if (valA < valB) return sortConfig.direction === 'asc' ? -1 : 1;
+            if (valA > valB) return sortConfig.direction === 'asc' ? 1 : -1;
+            return 0;
+        });
+        renderTable();
+    }
+
+    function sortTable(key) {
+        sortConfig.direction = (sortConfig.key === key && sortConfig.direction === 'desc') ? 'asc' : 'desc';
+        sortConfig.key = key;
+        applySort();
+    }
+
+    function changePage(dir) { currentPage = Math.max(1, Math.min(Math.ceil(dataGlobal.length/rowsPerPage), currentPage+dir)); renderTable(); }
+    function jumpToPage(val) { currentPage = parseInt(val); renderTable(); }
+    window.onload = loadData;
+</script>
+</body>
+</html>
