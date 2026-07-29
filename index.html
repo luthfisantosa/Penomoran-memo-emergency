@@ -134,22 +134,46 @@
     }
 
     document.getElementById('inputForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const d = new Date(document.getElementById('inTanggal').value);
-        const nextNo = getLatestSequence();
-        
+    e.preventDefault();
+    const d = new Date(document.getElementById('inTanggal').value);
+    const nextNo = getLatestSequence();
+    
+    // 1. Siapkan data sebagai URLSearchParams
+    const params = new URLSearchParams();
+    params.append('NO', nextNo);
+    params.append('NOMOR_SURAT', `${nextNo}/PPBJE/D2350/${['','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'][d.getMonth()+1]}/${d.getFullYear()}`);
+    params.append('URAIAN', document.getElementById('inUraian').value);
+    params.append('TANGGAL', `${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear()}`);
+    params.append('NO_PR', document.getElementById('inPR').value || '-');
+    params.append('SR', document.getElementById('inSR').value || '-');
+    params.append('KETERANGAN', document.getElementById('inKet').value || '-');
+
+    // 2. Kirim data
+    fetch(WEB_APP_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: params // Kirim sebagai params, bukan JSON.stringify
+    })
+    .then(() => {
+        // Update tampilan lokal
         dataGlobal.unshift({
             "NO": nextNo,
-            "NOMOR SURAT": `${nextNo}/PPBJE/D2350/${['','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'][d.getMonth()+1]}/${d.getFullYear()}`,
-            "URAIAN ISI INFORMASI": document.getElementById('inUraian').value,
-            "TANGGAL TERBIT": `${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear()}`,
-            "NO PR": document.getElementById('inPR').value || '-',
-            "SR": document.getElementById('inSR').value || '-',
-            "KETERANGAN": document.getElementById('inKet').value || '-'
+            "NOMOR SURAT": params.get('NOMOR_SURAT'),
+            "URAIAN ISI INFORMASI": params.get('URAIAN'),
+            "TANGGAL TERBIT": params.get('TANGGAL'),
+            "NO PR": params.get('NO_PR'),
+            "SR": params.get('SR'),
+            "KETERANGAN": params.get('KETERANGAN')
         });
         this.reset();
         applySort();
+        alert("Data berhasil disimpan!");
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Gagal menyimpan data.");
     });
+});
 
     // --- SORTING ---
     function applySort() {
