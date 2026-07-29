@@ -2,53 +2,33 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Manajemen Penomoran Surat</title>
+    <title>EME - Emergency Memo Enumerator</title>
     <style>
-        /* =========================================
-           1. CSS VARIABLES (Mudah untuk dimodifikasi)
-           ========================================= */
-        :root {
-            --sap-blue: #003366;
-            --sap-accent: #007cc0;
-            --sap-bg: #f0f2f5;
-            --input-uraian-width: 400px;
-            --input-ket-width: 250px;
-            --border-color: #dcdcdc;
+        :root { 
+            --sap-blue: #003366; --sap-accent: #007cc0; --sap-bg: #f0f2f5; 
+            --input-uraian-width: 400px; --input-ket-width: 250px;
         }
-
-        /* =========================================
-           2. GLOBAL & LAYOUT
-           ========================================= */
         body { font-family: "Segoe UI", sans-serif; background-color: var(--sap-bg); margin: 0; padding: 20px; }
-        .sap-container { background-color: white; border: 1px solid var(--border-color); max-width: 1200px; margin: auto; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .sap-container { background-color: white; border: 1px solid #dcdcdc; max-width: 1200px; margin: auto; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .sap-header { background-color: var(--sap-blue); color: white; padding: 15px 20px; font-weight: bold; border-bottom: 3px solid var(--sap-accent); }
-        
-        /* =========================================
-           3. TOOLBAR & FORM
-           ========================================= */
-        .sap-toolbar { background-color: #f8f9fa; padding: 15px 20px; border-bottom: 1px solid var(--border-color); display: flex; flex-wrap: wrap; gap: 10px; }
-        input { padding: 6px; border: 1px solid #999; border-radius: 0; }
-        .btn-sap { background-color: var(--sap-accent); color: white; border: none; padding: 8px 15px; cursor: pointer; font-weight: bold; }
-        .btn-delete { background-color: #d9534f; color: white; border: none; padding: 4px 8px; cursor: pointer; font-size: 11px; }
-
-        /* =========================================
-           4. TABLE STYLES
-           ========================================= */
+        .sap-toolbar { background-color: #f8f9fa; padding: 15px 20px; border-bottom: 1px solid #dcdcdc; display: flex; flex-wrap: wrap; gap: 10px; }
+        input { padding: 6px; border: 1px solid #999; }
+        .btn-sap { background-color: var(--sap-accent); color: white; border: none; padding: 8px 15px; cursor: pointer; }
         table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-        th { background-color: #e5e9ed; padding: 10px; border: 1px solid #ccc; font-size: 12px; cursor: pointer; text-align: left; }
-        td { padding: 8px; border: 1px solid #ccc; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        tr:hover { background-color: #e8f0fe; }
+        th { background-color: #e5e9ed; padding: 10px; border: 1px solid #ccc; font-size: 12px; cursor: pointer; }
+        td { padding: 8px; border: 1px solid #ccc; font-size: 13px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); z-index:100; }
+        .modal-content { background: white; margin: 10% auto; padding: 20px; width: 400px; border-top: 5px solid var(--sap-blue); }
     </style>
 </head>
 <body>
 
 <div class="sap-container">
-    <div class="sap-header">Manajemen Penomoran Surat - PPBJE/D2350</div>
-    
+    <div class="sap-header">Emergency Memo Enumerator - PPBJE/D2350</div>
     <div class="sap-toolbar">
         <form id="inputForm" style="display: flex; gap: 10px; flex-wrap: wrap;">
             <input type="text" id="inUraian" placeholder="Uraian Isi" style="width: var(--input-uraian-width);" required>
-            <input type="date" id="inTanggal">
+            <input type="date" id="inTanggal" required>
             <input type="text" id="inPR" placeholder="No. PR">
             <input type="text" id="inSR" placeholder="SR">
             <input type="text" id="inKet" placeholder="Keterangan" style="width: var(--input-ket-width);">
@@ -59,142 +39,64 @@
     <table id="tabelSurat">
         <thead>
             <tr>
-                <th style="width:40px" onclick="sortTable('NO')">NO</th>
-                <th style="width:180px" onclick="sortTable('NOMOR SURAT')">NOMOR SURAT</th>
+                <th style="width:40px">NO</th>
+                <th style="width:180px">NOMOR SURAT</th>
                 <th>URAIAN</th>
-                <th style="width:100px" onclick="sortTable('TANGGAL TERBIT')">TGL</th>
+                <th style="width:100px">TGL</th>
                 <th style="width:120px">AKSI</th>
             </tr>
         </thead>
         <tbody id="tableBody"></tbody>
     </table>
-
-    <div class="sap-footer" style="padding: 15px; display:flex; justify-content:center; gap:10px;">
-        <button onclick="changePage(-1)" class="btn-sap">Prev</button>
-        <select id="pageJump" onchange="jumpToPage(this.value)" style="padding:5px;"></select>
-        <button onclick="changePage(1)" class="btn-sap">Next</button>
-    </div>
 </div>
 
 <script>
+    // MASUKKAN URL WEB APP ANDA DI BAWAH INI:
+    const WEB_APP_URL = "ISI_URL_WEB_APP_ANDA_DISINI";
     let dataGlobal = [];
-    let currentPage = 1;
-    let sortConfig = { key: 'NOMOR SURAT', direction: 'desc' };
-    const rowsPerPage = 10;
-
-    // --- UTILS ---
-    function extractNum(str) { return parseInt(str.split('/')[0]) || 0; }
-    function getLatestSequence() { 
-        let maxNo = 0; 
-        dataGlobal.forEach(d => { const num = extractNum(d["NOMOR SURAT"]); if(num > maxNo) maxNo = num; }); 
-        return maxNo + 1; 
-    }
 
     async function loadData() {
-        try {
-            //const response = await fetch('rekap_surat_data.json'); //<----- data offline ------>
-             const response = await fetch('https://script.google.com/macros/s/AKfycbyyKqsN_0IlvyGreq4NzpTdceCdITQXeYW_QFmLIry-i6qc0EbwYS1DiJ9OSh_oRYM0/exec');
-            
-            dataGlobal = await response.json();
-            applySort();
-        } catch (e) { console.error("Error", e); }
-    }
-
-    function renderTable() {
-        const tableBody = document.getElementById('tableBody');
-        tableBody.innerHTML = '';
-        
-        const totalPages = Math.ceil(dataGlobal.length / rowsPerPage);
-        const paginatedData = dataGlobal.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
-
-        paginatedData.forEach((item, idx) => {
-            const actualIdx = ((currentPage - 1) * rowsPerPage) + idx;
-            tableBody.innerHTML += `<tr>
-                <td>${item["NO"]}</td>
-                <td>${item["NOMOR SURAT"]}</td>
-                <td>${item["URAIAN ISI INFORMASI"]}</td>
-                <td>${item["TANGGAL TERBIT"]}</td>
-                <td>
-                    <button style="padding:4px 8px; font-size:11px;" onclick="openEdit(${actualIdx})">Edit</button>
-                    <button class="btn-delete" onclick="deleteRow(${actualIdx})">Delete</button>
-                </td>
-            </tr>`;
-        });
-
-        const jump = document.getElementById('pageJump');
-        jump.innerHTML = Array.from({length: totalPages}, (_, i) => `<option value="${i+1}" ${i+1===currentPage?'selected':''}>Halaman ${i+1}</option>`).join('');
-    }
-
-    // --- ACTIONS ---
-    function deleteRow(idx) {
-        if(confirm("Yakin ingin menghapus data ini?")) {
-            dataGlobal.splice(idx, 1);
-            applySort();
-        }
-    }
-
-    document.getElementById('inputForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const d = new Date(document.getElementById('inTanggal').value);
-    const nextNo = getLatestSequence();
-    
-    // 1. Siapkan data sebagai URLSearchParams
-    const params = new URLSearchParams();
-    params.append('NO', nextNo);
-    params.append('NOMOR_SURAT', `${nextNo}/PPBJE/D2350/${['','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'][d.getMonth()+1]}/${d.getFullYear()}`);
-    params.append('URAIAN', document.getElementById('inUraian').value);
-    params.append('TANGGAL', `${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear()}`);
-    params.append('NO_PR', document.getElementById('inPR').value || '-');
-    params.append('SR', document.getElementById('inSR').value || '-');
-    params.append('KETERANGAN', document.getElementById('inKet').value || '-');
-
-    // 2. Kirim data
-    fetch(WEB_APP_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: params // Kirim sebagai params, bukan JSON.stringify
-    })
-    .then(() => {
-        // Update tampilan lokal
-        dataGlobal.unshift({
-            "NO": nextNo,
-            "NOMOR SURAT": params.get('NOMOR_SURAT'),
-            "URAIAN ISI INFORMASI": params.get('URAIAN'),
-            "TANGGAL TERBIT": params.get('TANGGAL'),
-            "NO PR": params.get('NO_PR'),
-            "SR": params.get('SR'),
-            "KETERANGAN": params.get('KETERANGAN')
-        });
-        this.reset();
-        applySort();
-        alert("Data berhasil disimpan!");
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        alert("Gagal menyimpan data.");
-    });
-});
-
-    // --- SORTING ---
-    function applySort() {
-        dataGlobal.sort((a, b) => {
-            let valA = a[sortConfig.key], valB = b[sortConfig.key];
-            if (sortConfig.key === 'NOMOR SURAT') { valA = extractNum(valA); valB = extractNum(valB); }
-            if (valA < valB) return sortConfig.direction === 'asc' ? -1 : 1;
-            if (valA > valB) return sortConfig.direction === 'asc' ? 1 : -1;
-            return 0;
-        });
+        const res = await fetch(WEB_APP_URL);
+        const data = await res.json();
+        // Skip baris header (indeks 0)
+        dataGlobal = data.slice(1).map(r => ({
+            "NO": r[0], "NOMOR SURAT": r[1], "URAIAN ISI INFORMASI": r[2], 
+            "TANGGAL TERBIT": r[3], "NO PR": r[4], "SR": r[5], "KETERANGAN": r[6]
+        }));
         renderTable();
     }
 
-    function sortTable(key) {
-        sortConfig.direction = (sortConfig.key === key && sortConfig.direction === 'desc') ? 'asc' : 'desc';
-        sortConfig.key = key;
-        applySort();
+    function renderTable() {
+        const body = document.getElementById('tableBody');
+        body.innerHTML = '';
+        dataGlobal.forEach((item, idx) => {
+            body.innerHTML += `<tr>
+                <td>${item["NO"]}</td><td>${item["NOMOR SURAT"]}</td><td>${item["URAIAN ISI INFORMASI"]}</td>
+                <td>${item["TANGGAL TERBIT"]}</td>
+                <td><button onclick="alert('Fitur edit server-side butuh backend update')">Edit</button> <button onclick="deleteRow(${idx})">Del</button></td>
+            </tr>`;
+        });
     }
 
-    function changePage(dir) { currentPage = Math.max(1, Math.min(Math.ceil(dataGlobal.length/rowsPerPage), currentPage+dir)); renderTable(); }
-    function jumpToPage(val) { currentPage = parseInt(val); renderTable(); }
+    document.getElementById('inputForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const d = new Date(document.getElementById('inTanggal').value);
+        const nextNo = (dataGlobal.length > 0) ? Math.max(...dataGlobal.map(d => parseInt(d["NOMOR SURAT"].split('/')[0]))) + 1 : 1;
+        
+        const params = new URLSearchParams();
+        params.append('NO', nextNo);
+        params.append('NOMOR_SURAT', `${nextNo}/PPBJE/D2350/${['','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'][d.getMonth()+1]}/${d.getFullYear()}`);
+        params.append('URAIAN', document.getElementById('inUraian').value);
+        params.append('TANGGAL', `${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear()}`);
+        params.append('NO_PR', document.getElementById('inPR').value || '-');
+        params.append('SR', document.getElementById('inSR').value || '-');
+        params.append('KETERANGAN', document.getElementById('inKet').value || '-');
+
+        fetch(WEB_APP_URL, { method: 'POST', mode: 'no-cors', body: params })
+        .then(() => { location.reload(); }); // Refresh agar data dari Google Sheet masuk
+    });
+
+    function deleteRow(idx) { if(confirm("Hapus data?")) { /* Tambahkan fetch DELETE di sini */ } }
     window.onload = loadData;
 </script>
 </body>
