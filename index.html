@@ -4,34 +4,29 @@
     <meta charset="UTF-8">
     <title>EME - Emergency Memo Enumerator</title>
     <style>
-        :root { 
-            --sap-blue: #003366; --sap-accent: #007cc0; --sap-bg: #f0f2f5; 
-            --input-uraian-width: 400px; --input-ket-width: 250px;
-        }
+        :root { --sap-blue: #003366; --sap-accent: #007cc0; --sap-bg: #f0f2f5; }
         body { font-family: "Segoe UI", sans-serif; background-color: var(--sap-bg); margin: 0; padding: 20px; }
-        .sap-container { background-color: white; border: 1px solid #dcdcdc; max-width: 1200px; margin: auto; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .sap-container { background-color: white; border: 1px solid #dcdcdc; max-width: 1100px; margin: auto; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .sap-header { background-color: var(--sap-blue); color: white; padding: 15px 20px; font-weight: bold; border-bottom: 3px solid var(--sap-accent); }
         .sap-toolbar { background-color: #f8f9fa; padding: 15px 20px; border-bottom: 1px solid #dcdcdc; display: flex; flex-wrap: wrap; gap: 10px; }
         input { padding: 6px; border: 1px solid #999; }
         .btn-sap { background-color: var(--sap-accent); color: white; border: none; padding: 8px 15px; cursor: pointer; }
-        table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-        th { background-color: #e5e9ed; padding: 10px; border: 1px solid #ccc; font-size: 12px; cursor: pointer; }
-        td { padding: 8px; border: 1px solid #ccc; font-size: 13px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); z-index:100; }
-        .modal-content { background: white; margin: 10% auto; padding: 20px; width: 400px; border-top: 5px solid var(--sap-blue); }
+        table { width: 100%; border-collapse: collapse; }
+        th { background-color: #e5e9ed; padding: 10px; border: 1px solid #ccc; font-size: 12px; text-align: left; }
+        td { padding: 8px; border: 1px solid #ccc; font-size: 13px; }
+        .pagination { padding: 15px; text-align: center; background: #eee; }
     </style>
 </head>
 <body>
 
 <div class="sap-container">
-    <div class="sap-header">Emergency Memo Enumerator - PPBJE/D2350</div>
+    <div class="sap-header">Emergency Memo Enumerator</div>
     <div class="sap-toolbar">
         <form id="inputForm" style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <input type="text" id="inUraian" placeholder="Uraian Isi" style="width: var(--input-uraian-width);" required>
+            <input type="text" id="inUraian" placeholder="Uraian Surat" style="width: 250px;" required>
             <input type="date" id="inTanggal" required>
             <input type="text" id="inPR" placeholder="No. PR">
             <input type="text" id="inSR" placeholder="SR">
-            <input type="text" id="inKet" placeholder="Keterangan" style="width: var(--input-ket-width);">
             <button type="submit" class="btn-sap">Save</button>
         </form>
     </div>
@@ -39,64 +34,70 @@
     <table id="tabelSurat">
         <thead>
             <tr>
-                <th style="width:40px">NO</th>
-                <th style="width:180px">NOMOR SURAT</th>
-                <th>URAIAN</th>
-                <th style="width:100px">TGL</th>
-                <th style="width:120px">AKSI</th>
+                <th>Tgl</th>
+                <th>Nomor Surat</th>
+                <th>Uraian Surat</th>
+                <th>No PR</th>
+                <th>No SR</th>
             </tr>
         </thead>
         <tbody id="tableBody"></tbody>
     </table>
+    <div class="pagination" id="paginationControls"></div>
 </div>
 
 <script>
-    // MASUKKAN URL WEB APP ANDA DI BAWAH INI:
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyyKqsN_0IlvyGreq4NzpTdceCdITQXeYW_QFmLIry-i6qc0EbwYS1DiJ9OSh_oRYM0/exec";
+    const WEB_APP_URL = "ISI_URL_WEB_APP_ANDA_DISINI"; 
     let dataGlobal = [];
+    let currentPage = 1;
+    const rowsPerPage = 10;
 
     async function loadData() {
         const res = await fetch(WEB_APP_URL);
         const data = await res.json();
-        // Skip baris header (indeks 0)
+        // Mengurutkan data berdasarkan nomor surat terbesar (descending)
         dataGlobal = data.slice(1).map(r => ({
-            "NO": r[0], "NOMOR SURAT": r[1], "URAIAN ISI INFORMASI": r[2], 
-            "TANGGAL TERBIT": r[3], "NO PR": r[4], "SR": r[5], "KETERANGAN": r[6]
-        }));
+            tgl: r[3], nomor: r[1], uraian: r[2], pr: r[4], sr: r[5]
+        })).sort((a, b) => parseInt(b.nomor) - parseInt(a.nomor));
         renderTable();
     }
 
     function renderTable() {
         const body = document.getElementById('tableBody');
-        body.innerHTML = '';
-        dataGlobal.forEach((item, idx) => {
-            body.innerHTML += `<tr>
-                <td>${item["NO"]}</td><td>${item["NOMOR SURAT"]}</td><td>${item["URAIAN ISI INFORMASI"]}</td>
-                <td>${item["TANGGAL TERBIT"]}</td>
-                <td><button onclick="alert('Fitur edit server-side butuh backend update')">Edit</button> <button onclick="deleteRow(${idx})">Del</button></td>
-            </tr>`;
-        });
+        const start = (currentPage - 1) * rowsPerPage;
+        const pageData = dataGlobal.slice(start, start + rowsPerPage);
+        
+        body.innerHTML = pageData.map(r => 
+            `<tr><td>${r.tgl}</td><td>${r.nomor}</td><td>${r.uraian}</td><td>${r.pr}</td><td>${r.sr}</td></tr>`
+        ).join('');
+
+        // Render Pagination Buttons
+        const totalPages = Math.ceil(dataGlobal.length / rowsPerPage);
+        document.getElementById('paginationControls').innerHTML = 
+            `Halaman: ${currentPage} / ${totalPages} 
+             <button onclick="changePage(-1)" ${currentPage===1?'disabled':''}>Prev</button>
+             <button onclick="changePage(1)" ${currentPage===totalPages?'disabled':''}>Next</button>`;
     }
+
+    function changePage(dir) { currentPage += dir; renderTable(); }
 
     document.getElementById('inputForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const d = new Date(document.getElementById('inTanggal').value);
-        const nextNo = (dataGlobal.length > 0) ? Math.max(...dataGlobal.map(d => parseInt(d["NOMOR SURAT"].split('/')[0]))) + 1 : 1;
+        const nextNo = (dataGlobal.length > 0) ? parseInt(dataGlobal[0].nomor) + 1 : 1;
         
         const params = new URLSearchParams();
         params.append('NO', nextNo);
-        params.append('NOMOR_SURAT', `${nextNo}/PPBJE/D2350/${['','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'][d.getMonth()+1]}/${d.getFullYear()}`);
+        params.append('NOMOR_SURAT', nextNo + "/PPBJE/D2350/" + (['','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'][d.getMonth()+1]) + "/" + d.getFullYear());
         params.append('URAIAN', document.getElementById('inUraian').value);
-        params.append('TANGGAL', `${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear()}`);
+        params.append('TANGGAL', d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear());
         params.append('NO_PR', document.getElementById('inPR').value || '-');
         params.append('SR', document.getElementById('inSR').value || '-');
-        params.append('KETERANGAN', document.getElementById('inKet').value || '-');
 
         fetch(WEB_APP_URL, { method: 'POST', mode: 'no-cors', body: params })
-        .then(() => { location.reload(); }); // Refresh agar data dari Google Sheet masuk
+        .then(() => { alert("Sukses!"); location.reload(); });
     });
 
-    function deleteRow(idx) { if(confirm("Hapus data?")) { /* Tambahkan fetch DELETE di sini */ } }
     window.onload = loadData;
 </script>
 </body>
