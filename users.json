@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3",
+      "role": "superadmin",
+      "displayName": "Super Administrator",
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    }
+  ]
+}
