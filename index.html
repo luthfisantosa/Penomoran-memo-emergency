@@ -17,272 +17,183 @@
 }
 body{font-family:'Segoe UI',Arial,sans-serif;background:var(--g100);color:var(--g800);min-height:100vh}
 
-/* ── LOGIN SCREEN ── */
-.login-screen{
-  display:none;position:fixed;inset:0;
-  background:linear-gradient(135deg,var(--gd) 0%,var(--gm) 100%);
-  z-index:9000;align-items:center;justify-content:center;padding:20px;
-}
+/* LOGIN */
+.login-screen{display:none;position:fixed;inset:0;background:linear-gradient(135deg,var(--gd) 0%,var(--gm) 100%);z-index:9000;align-items:center;justify-content:center;padding:20px}
 .login-screen.on{display:flex}
-.login-box{
-  background:var(--white);border-radius:var(--r);
-  box-shadow:var(--sh3);width:100%;max-width:380px;
-  padding:32px 28px;animation:popIn .25s ease;
-}
+.login-box{background:var(--white);border-radius:var(--r);box-shadow:var(--sh3);width:100%;max-width:360px;padding:30px 26px;animation:popIn .25s ease}
 .login-logo{text-align:center;margin-bottom:20px}
-.login-logo .ico{
-  width:64px;height:64px;background:var(--gl);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:24px;font-weight:900;color:var(--gd);margin:0 auto 10px;
-}
-.login-logo h2{font-size:1.1rem;color:var(--gd);font-weight:700}
-.login-logo p{font-size:.78rem;color:var(--g400);margin-top:3px}
-.login-form .fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
-.login-form label{font-size:.79rem;font-weight:600;color:var(--g700)}
-.login-err{background:#fef2f2;border:1px solid #fecaca;border-radius:var(--rs);padding:9px 12px;font-size:.82rem;color:#991b1b;margin-bottom:12px;display:none}
+.login-ico{width:60px;height:60px;background:var(--gl);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:var(--gd);margin:0 auto 10px}
+.login-logo h2{font-size:1.05rem;color:var(--gd);font-weight:700}
+.login-logo p{font-size:.76rem;color:var(--g400);margin-top:2px}
+.lfg{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.lfg label{font-size:.78rem;font-weight:600;color:var(--g700)}
+.login-err{background:#fef2f2;border:1px solid #fecaca;border-radius:var(--rs);padding:8px 12px;font-size:.8rem;color:#991b1b;margin-bottom:11px;display:none}
 
-/* ── HEADER ── */
-header{
-  background:linear-gradient(135deg,var(--gd) 0%,var(--gm) 100%);
-  color:var(--white);padding:14px 24px;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:14px;box-shadow:var(--sh2);
-}
-.hL{display:flex;align-items:center;gap:12px}
-.hlogo{
-  width:40px;height:40px;background:var(--white);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:900;color:var(--gd);flex-shrink:0;
-}
-.htxt h1{font-size:1rem;font-weight:700}
-.htxt p{font-size:.72rem;opacity:.75;margin-top:1px}
-.hR{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+/* HEADER */
+header{background:linear-gradient(135deg,var(--gd) 0%,var(--gm) 100%);color:var(--white);padding:13px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--sh2);flex-wrap:wrap}
+.hL{display:flex;align-items:center;gap:11px}
+.hlogo{width:38px;height:38px;background:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--gd);flex-shrink:0}
+.htxt h1{font-size:.95rem;font-weight:700}
+.htxt p{font-size:.7rem;opacity:.75;margin-top:1px}
+.hR{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.user-chip{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 11px 4px 6px;font-size:.76rem}
+.user-avatar{width:22px;height:22px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:800;color:var(--gd)}
+.user-role{font-size:.63rem;opacity:.7}
+.guest-badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:4px 11px;font-size:.76rem;opacity:.85}
+.hbtn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:var(--white);border-radius:var(--rs);padding:5px 11px;cursor:pointer;font-size:.76rem;font-weight:600;display:flex;align-items:center;gap:5px;transition:background .2s;font-family:inherit}
+.hbtn:hover{background:rgba(255,255,255,.27)}
+.hbtn.red{background:rgba(239,68,68,.22);border-color:rgba(239,68,68,.4)}
+.hbtn.red:hover{background:rgba(239,68,68,.38)}
 
-/* user chip */
-.user-chip{
-  display:flex;align-items:center;gap:7px;
-  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);
-  border-radius:20px;padding:5px 12px 5px 7px;font-size:.78rem;
-}
-.user-avatar{
-  width:24px;height:24px;border-radius:50%;background:var(--white);
-  display:flex;align-items:center;justify-content:center;
-  font-size:.7rem;font-weight:800;color:var(--gd);flex-shrink:0;
-}
-.user-role{font-size:.65rem;opacity:.7}
-.guest-badge{
-  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
-  border-radius:20px;padding:5px 12px;font-size:.78rem;opacity:.8;
-}
-
-.hbtn{
-  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);
-  color:var(--white);border-radius:var(--rs);padding:6px 12px;
-  cursor:pointer;font-size:.78rem;font-weight:600;
-  display:flex;align-items:center;gap:5px;transition:background .2s;
-  font-family:inherit;
-}
-.hbtn:hover{background:rgba(255,255,255,.25)}
-.hbtn.red{background:rgba(239,68,68,.25);border-color:rgba(239,68,68,.4)}
-.hbtn.red:hover{background:rgba(239,68,68,.4)}
-
-/* ── NOTICE BAR ── */
-.notice-bar{
-  background:#fef3c7;border-bottom:1px solid #fde68a;
-  padding:9px 24px;font-size:.82rem;color:#92400e;
-  display:flex;align-items:center;gap:8px;
-}
+/* NOTICE */
+.notice-bar{background:#fef3c7;border-bottom:1px solid #fde68a;padding:8px 22px;font-size:.8rem;color:#92400e;display:flex;align-items:center;gap:7px}
 .notice-bar.hidden{display:none}
 
-/* ── MAIN ── */
-main{max-width:1020px;margin:22px auto;padding:0 14px 60px}
+/* MAIN */
+main{max-width:1020px;margin:20px auto;padding:0 14px 60px}
+.card{background:var(--white);border-radius:var(--r);box-shadow:var(--sh1);padding:20px 22px;margin-bottom:18px}
+.ctitle{font-size:.77rem;font-weight:700;color:var(--gd);text-transform:uppercase;letter-spacing:.6px;border-left:4px solid var(--g);padding-left:8px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
 
-/* ── CARD ── */
-.card{background:var(--white);border-radius:var(--r);box-shadow:var(--sh1);padding:20px 24px;margin-bottom:20px}
-.ctitle{
-  font-size:.78rem;font-weight:700;color:var(--gd);
-  text-transform:uppercase;letter-spacing:.6px;
-  border-left:4px solid var(--g);padding-left:9px;margin-bottom:16px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-
-/* ── FORM ── */
+/* FORM */
 .fgrid{display:grid;grid-template-columns:170px 1fr 1fr;gap:12px}
 .fg{display:flex;flex-direction:column;gap:4px}
 .fg.full{grid-column:1/-1}
-label{font-size:.78rem;font-weight:600;color:var(--g700)}
+label{font-size:.77rem;font-weight:600;color:var(--g700)}
 .req{color:var(--red)}
-input[type=text],input[type=date],input[type=password]{
-  border:1.5px solid var(--g300);border-radius:var(--rs);
-  padding:8px 10px;font-size:.875rem;font-family:inherit;
-  background:var(--g50);color:var(--g800);width:100%;
-  transition:border .18s,box-shadow .18s;
-}
-input:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(26,107,58,.11);background:var(--white)}
+input[type=text],input[type=date],input[type=password],select{border:1.5px solid var(--g300);border-radius:var(--rs);padding:7px 10px;font-size:.86rem;font-family:inherit;background:var(--g50);color:var(--g800);width:100%;transition:border .18s,box-shadow .18s}
+input:focus,select:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(26,107,58,.11);background:var(--white)}
 input[type=date]{cursor:pointer}
 input[type=date]::-webkit-calendar-picker-indicator{cursor:pointer;opacity:.6;filter:invert(30%) sepia(60%) saturate(400%) hue-rotate(100deg)}
-.nprev{
-  background:var(--gl);border:1.5px dashed var(--g);border-radius:var(--rs);
-  padding:8px 13px;font-size:.88rem;font-weight:700;color:var(--gd);
-  display:flex;align-items:center;gap:8px;margin-bottom:14px;
-}
-.nprev .lbl{font-size:.7rem;font-weight:600;color:var(--g400);text-transform:uppercase;white-space:nowrap}
+.nprev{background:var(--gl);border:1.5px dashed var(--g);border-radius:var(--rs);padding:8px 12px;font-size:.87rem;font-weight:700;color:var(--gd);display:flex;align-items:center;gap:8px;margin-bottom:13px}
+.nprev .lbl{font-size:.68rem;font-weight:600;color:var(--g400);text-transform:uppercase;white-space:nowrap}
 
-/* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:var(--rs);border:none;cursor:pointer;font-size:.83rem;font-weight:600;transition:all .15s;line-height:1;font-family:inherit}
-.btn-primary{background:var(--g);color:var(--white)}
-.btn-primary:hover{background:var(--gd);transform:translateY(-1px)}
-.btn-danger{background:var(--red);color:var(--white);padding:5px 12px;font-size:.77rem}
-.btn-danger:hover{background:#c0392b}
-.btn-detail{background:var(--gl);color:var(--gd);border:1px solid var(--g);padding:4px 11px;font-size:.77rem}
-.btn-detail:hover{background:var(--g);color:var(--white)}
-.btn-edit{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;padding:4px 11px;font-size:.77rem}
-.btn-edit:hover{background:#1d4ed8;color:var(--white)}
-.btn-cancel{background:var(--g100);color:var(--g700);border:1.5px solid var(--g300);padding:7px 18px}
-.btn-cancel:hover{background:var(--g200)}
-.btn-upload{background:var(--g100);color:var(--gd);border:1.5px solid var(--g);padding:6px 12px;font-size:.8rem}
-.btn-upload:hover{background:var(--gl)}
-.btn-blue{background:var(--blue);color:var(--white)}
-.btn-blue:hover{background:var(--bluedark)}
-.factions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 15px;border-radius:var(--rs);border:none;cursor:pointer;font-size:.82rem;font-weight:600;transition:all .15s;line-height:1;font-family:inherit}
+.btn-primary{background:var(--g);color:var(--white)}.btn-primary:hover{background:var(--gd);transform:translateY(-1px)}
+.btn-danger{background:var(--red);color:var(--white);padding:5px 11px;font-size:.76rem}.btn-danger:hover{background:#c0392b}
+.btn-detail{background:var(--gl);color:var(--gd);border:1px solid var(--g);padding:4px 10px;font-size:.76rem}.btn-detail:hover{background:var(--g);color:var(--white)}
+.btn-edit{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;padding:4px 10px;font-size:.76rem}.btn-edit:hover{background:#1d4ed8;color:var(--white)}
+.btn-cancel{background:var(--g100);color:var(--g700);border:1.5px solid var(--g300);padding:7px 17px}.btn-cancel:hover{background:var(--g200)}
+.btn-upload{background:var(--g100);color:var(--gd);border:1.5px solid var(--g);padding:5px 11px;font-size:.78rem}.btn-upload:hover{background:var(--gl)}
+.factions{display:flex;justify-content:flex-end;gap:8px;margin-top:13px}
 
-/* ── BADGE ── */
-.badge-ct{background:var(--g);color:var(--white);border-radius:12px;padding:2px 8px;font-size:.72rem;font-weight:700}
-.role-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.68rem;font-weight:700}
+/* BADGE */
+.badge-ct{background:var(--g);color:var(--white);border-radius:12px;padding:2px 8px;font-size:.71rem;font-weight:700}
+.role-badge{display:inline-block;padding:2px 7px;border-radius:10px;font-size:.67rem;font-weight:700}
 .role-superadmin{background:#fef3c7;color:#92400e}
 .role-admin{background:#dbeafe;color:#1e40af}
-.role-viewer{background:var(--g200);color:var(--g600)}
 
-/* ── TABLE ── */
+/* TABLE */
 .ttbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap}
-.sbox{display:flex;align-items:center;gap:7px;border:1.5px solid var(--g300);border-radius:var(--rs);padding:6px 10px;background:var(--g50);flex:1;max-width:300px}
-.sbox input{border:none;background:transparent;font-size:.84rem;width:100%;padding:0}
+.sbox{display:flex;align-items:center;gap:6px;border:1.5px solid var(--g300);border-radius:var(--rs);padding:5px 10px;background:var(--g50);flex:1;max-width:300px}
+.sbox input{border:none;background:transparent;font-size:.83rem;width:100%;padding:0}
 .sbox input:focus{box-shadow:none}
-table{width:100%;border-collapse:collapse;font-size:.83rem}
-thead th{background:var(--gd);color:var(--white);padding:9px 12px;text-align:left;font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+thead th{background:var(--gd);color:var(--white);padding:9px 11px;text-align:left;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
 thead th:first-child{border-radius:6px 0 0 6px}thead th:last-child{border-radius:0 6px 6px 0}
 tbody tr{border-bottom:1px solid var(--g200);transition:background .1s}
 tbody tr:hover{background:var(--gl)}
-tbody td{padding:9px 12px;vertical-align:middle}
-.tc-no{font-weight:700;color:var(--gd);font-size:.78rem;white-space:nowrap}
-.tc-dt{color:var(--g400);font-size:.76rem;white-space:nowrap}
+tbody td{padding:9px 11px;vertical-align:middle}
+.tc-no{font-weight:700;color:var(--gd);font-size:.77rem;white-space:nowrap}
+.tc-dt{color:var(--g400);font-size:.75rem;white-space:nowrap}
 .no-data{text-align:center;padding:36px;color:var(--g400);font-style:italic}
 
-/* ── PAGINATION ── */
-.pagi{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:.78rem;color:var(--g600);flex-wrap:wrap;gap:8px}
+/* PAGINATION */
+.pagi{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:.77rem;color:var(--g600);flex-wrap:wrap;gap:8px}
 .pbts{display:flex;gap:4px}
-.pbtn{padding:4px 8px;border:1.5px solid var(--g300);border-radius:5px;background:var(--white);cursor:pointer;font-size:.76rem;transition:all .14s}
+.pbtn{padding:4px 8px;border:1.5px solid var(--g300);border-radius:5px;background:var(--white);cursor:pointer;font-size:.75rem;transition:all .13s}
 .pbtn:hover:not(:disabled){border-color:var(--g);color:var(--g)}
 .pbtn.active{background:var(--g);color:var(--white);border-color:var(--g)}
 .pbtn:disabled{opacity:.35;cursor:not-allowed}
 
-/* ── MODAL ── */
+/* MODAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:1000;align-items:center;justify-content:center;padding:18px}
 .overlay.on{display:flex}
 .modal{background:var(--white);border-radius:var(--r);box-shadow:var(--sh3);width:100%;max-width:520px;max-height:92vh;overflow-y:auto;animation:popIn .2s ease}
-.modal.sm{max-width:420px}.modal.lg{max-width:640px}
+.modal.sm{max-width:400px}.modal.lg{max-width:640px}
 @keyframes popIn{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
-.mhdr{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 11px;border-bottom:1px solid var(--g200)}
-.mhdr h2{font-size:.92rem;color:var(--gd)}
+.mhdr{display:flex;align-items:center;justify-content:space-between;padding:13px 17px 10px;border-bottom:1px solid var(--g200)}
+.mhdr h2{font-size:.9rem;color:var(--gd)}
 .mcls{background:none;border:none;cursor:pointer;font-size:1.1rem;color:var(--g400);padding:3px;border-radius:4px}
 .mcls:hover{background:var(--g100)}
-.mbody{padding:16px 18px 20px}
-
-/* detail */
+.mbody{padding:15px 17px 19px}
 .dgrid{display:flex;flex-direction:column;gap:8px}
-.drow{display:grid;grid-template-columns:120px 1fr;gap:8px;align-items:start}
-.dkey{font-size:.73rem;font-weight:700;color:var(--g400);text-transform:uppercase;letter-spacing:.3px;padding-top:1px}
-.dval{font-size:.86rem;color:var(--g800);font-weight:500;word-break:break-word}
-.dval.nm{font-size:.92rem;font-weight:800;color:var(--gd)}
+.drow{display:grid;grid-template-columns:115px 1fr;gap:7px;align-items:start}
+.dkey{font-size:.72rem;font-weight:700;color:var(--g400);text-transform:uppercase;padding-top:1px}
+.dval{font-size:.85rem;color:var(--g800);font-weight:500;word-break:break-word}
+.dval.nm{font-size:.9rem;font-weight:800;color:var(--gd)}
 .divider{border:none;border-top:1px solid var(--g200);margin:10px 0}
-
-/* edit form dalam modal */
-.modal-fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.modal-fgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 .modal-fgrid .fg.full{grid-column:1/-1}
-
-/* pw */
 .pw-wrap{position:relative}
-.pw-wrap input{padding-right:36px}
-.pw-toggle{position:absolute;right:9px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:.85rem;color:var(--g400);padding:2px}
+.pw-wrap input{padding-right:35px}
+.pw-toggle{position:absolute;right:9px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:.83rem;color:var(--g400);padding:2px}
 .pw-toggle:hover{color:var(--g700)}
-.auth-err{color:var(--red);font-size:.77rem;margin-top:6px;display:none}
+.auth-err{color:var(--red);font-size:.76rem;margin-top:5px;display:none}
 .strength-bar{height:4px;border-radius:2px;margin-top:4px;background:var(--g200);overflow:hidden}
 .strength-fill{height:100%;border-radius:2px;transition:width .3s,background .3s}
-
-/* settings */
+.hint{font-size:.69rem;color:var(--g400);margin-top:2px}
 .setting-section{margin-bottom:18px}
-.setting-section h3{font-size:.8rem;font-weight:700;color:var(--gd);margin-bottom:9px;padding-bottom:5px;border-bottom:1px solid var(--g200)}
-.setting-row{display:flex;flex-direction:column;gap:4px;margin-bottom:11px}
-.hint{font-size:.7rem;color:var(--g400);margin-top:2px}
-.status-badge{display:inline-flex;align-items:center;gap:5px;font-size:.7rem;padding:2px 8px;border-radius:20px;font-weight:700}
-.status-set{background:#dcfce7;color:#166534}
-.status-unset{background:#fef3c7;color:#92400e}
-.danger-zone{background:#fef2f2;border:1px solid #fecaca;border-radius:var(--rs);padding:12px;margin-top:14px}
-.danger-zone h4{font-size:.78rem;font-weight:700;color:#991b1b;margin-bottom:5px}
-.danger-zone p{font-size:.73rem;color:#b91c1c;margin-bottom:9px}
-
-/* user management table */
-.user-table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px}
-.user-table th{background:var(--g100);color:var(--g700);padding:8px 10px;text-align:left;font-size:.72rem;font-weight:700;text-transform:uppercase}
-.user-table td{padding:8px 10px;border-bottom:1px solid var(--g200);vertical-align:middle}
-.user-table tr:hover td{background:var(--g50)}
-
-/* del confirm */
+.setting-section h3{font-size:.79rem;font-weight:700;color:var(--gd);margin-bottom:9px;padding-bottom:5px;border-bottom:1px solid var(--g200)}
+.setting-row{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.danger-zone{background:#fef2f2;border:1px solid #fecaca;border-radius:var(--rs);padding:12px;margin-top:13px}
+.danger-zone h4{font-size:.77rem;font-weight:700;color:#991b1b;margin-bottom:4px}
+.danger-zone p{font-size:.72rem;color:#b91c1c;margin-bottom:8px}
+.user-table{width:100%;border-collapse:collapse;font-size:.8rem;margin-top:7px}
+.user-table th{background:var(--g100);color:var(--g700);padding:7px 9px;text-align:left;font-size:.7rem;font-weight:700;text-transform:uppercase}
+.user-table td{padding:7px 9px;border-bottom:1px solid var(--g200);vertical-align:middle}
 .del-box{text-align:center}
-.del-box .ic{font-size:2rem;margin-bottom:6px}
-.del-actions{display:flex;justify-content:center;gap:9px;margin-top:14px}
-
-/* wipe steps */
+.del-box .ic{font-size:1.9rem;margin-bottom:6px}
+.del-actions{display:flex;justify-content:center;gap:8px;margin-top:12px}
 .wipe-step{text-align:center}
-.wipe-step .big-ic{font-size:2.4rem;margin-bottom:7px}
-.wipe-step h3{font-weight:700;color:var(--red);margin-bottom:7px;font-size:.95rem}
-.wipe-step p{font-size:.83rem;color:var(--g600);margin-bottom:12px}
+.wipe-step .big-ic{font-size:2.2rem;margin-bottom:6px}
+.wipe-step h3{font-weight:700;color:var(--red);margin-bottom:6px;font-size:.92rem}
+.wipe-step p{font-size:.81rem;color:var(--g600);margin-bottom:11px}
 
-/* toast */
-.tc-wrap{position:fixed;bottom:22px;right:22px;z-index:2000;display:flex;flex-direction:column;gap:6px}
-.toast{background:var(--g800);color:var(--white);padding:9px 15px;border-radius:var(--rs);font-size:.82rem;box-shadow:var(--sh2);animation:slideUp .2s ease;display:flex;align-items:center;gap:7px;min-width:200px}
+/* TOAST */
+.tc-wrap{position:fixed;bottom:20px;right:20px;z-index:2000;display:flex;flex-direction:column;gap:6px}
+.toast{background:var(--g800);color:var(--white);padding:9px 14px;border-radius:var(--rs);font-size:.8rem;box-shadow:var(--sh2);animation:slideUp .2s ease;display:flex;align-items:center;gap:6px;min-width:200px;max-width:320px}
 .toast.ok{background:var(--gd)}.toast.err{background:var(--red)}.toast.warn{background:var(--warn)}
-@keyframes slideUp{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes slideUp{from{transform:translateY(15px);opacity:0}to{transform:translateY(0);opacity:1}}
 
-@media(max-width:620px){
+@media(max-width:580px){
   .fgrid,.modal-fgrid{grid-template-columns:1fr}
   .fg.full,.modal-fgrid .fg.full{grid-column:1}
-  header{padding:10px 14px}
+  header{padding:10px 12px}
   .card{padding:14px 12px}
-  .drow{grid-template-columns:100px 1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- ══ LOGIN SCREEN ══ -->
+<!-- LOGIN -->
 <div class="login-screen" id="loginScreen">
   <div class="login-box">
     <div class="login-logo">
-      <div class="ico">PK</div>
+      <div class="login-ico">PK</div>
       <h2>Memo Emergency</h2>
       <p>PT Pupuk Kujang · D2350</p>
     </div>
-    <div class="login-err" id="loginErr">❌ Username atau password salah.</div>
-    <div class="login-form">
-      <div class="fg">
-        <label>Username</label>
-        <input type="text" id="loginUser" placeholder="Username" onkeydown="if(event.key==='Enter')doLogin()"/>
-      </div>
-      <div class="fg">
-        <label>Password</label>
-        <div class="pw-wrap">
-          <input type="password" id="loginPass" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()"/>
-          <button class="pw-toggle" onclick="togglePw('loginPass',this)">👁️</button>
-        </div>
-      </div>
-      <button class="btn btn-primary" style="width:100%;margin-top:4px;justify-content:center" onclick="doLogin()">🔑 Masuk</button>
-      <button class="btn btn-cancel" style="width:100%;margin-top:8px;justify-content:center" onclick="loginAsGuest()">👁️ Lanjut sebagai Tamu</button>
+    <div class="login-err" id="loginErr"></div>
+    <div class="lfg">
+      <label>Username</label>
+      <input type="text" id="loginUser" placeholder="Username" autocomplete="username"
+        onkeydown="if(event.key==='Enter')document.getElementById('loginPass').focus()"/>
     </div>
+    <div class="lfg">
+      <label>Password</label>
+      <div class="pw-wrap">
+        <input type="password" id="loginPass" placeholder="Password" autocomplete="current-password"
+          onkeydown="if(event.key==='Enter')doLogin()"/>
+        <button class="pw-toggle" onclick="togglePw('loginPass',this)">👁️</button>
+      </div>
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;margin-bottom:8px" onclick="doLogin()">🔑 Masuk</button>
+    <button class="btn btn-cancel" style="width:100%;justify-content:center" onclick="loginAsGuest()">👁️ Lanjut sebagai Tamu</button>
   </div>
 </div>
 
-<!-- ══ HEADER ══ -->
+<!-- HEADER -->
 <header>
   <div class="hL">
     <div class="hlogo">PK</div>
@@ -295,18 +206,19 @@ tbody td{padding:9px 12px;vertical-align:middle}
     <div id="userChip"></div>
     <button class="hbtn" id="btnSettings" onclick="bukaSettings()" style="display:none">⚙️ Kelola</button>
     <button class="hbtn red" id="btnLogout" onclick="doLogout()" style="display:none">🚪 Logout</button>
-    <button class="hbtn" id="btnLoginHeader" onclick="showLogin()">🔑 Login</button>
+    <button class="hbtn" id="btnLoginHdr" onclick="showLogin()">🔑 Login</button>
   </div>
 </header>
 
-<!-- ══ NOTICE BAR ══ -->
+<!-- NOTICE -->
 <div class="notice-bar" id="noticeBar">
-  👁️ Anda masuk sebagai <strong>Tamu</strong> — hanya dapat melihat daftar memo. <a href="#" onclick="showLogin();return false" style="color:#92400e;font-weight:700">Login</a> untuk akses penuh.
+  👁️ Mode Tamu — hanya bisa lihat daftar.
+  <a href="#" onclick="showLogin();return false" style="color:#92400e;font-weight:700;margin-left:4px">Login di sini</a> untuk akses penuh.
 </div>
 
 <main>
 
-<!-- FORM (hanya tampil jika login) -->
+<!-- FORM -->
 <div class="card" id="formCard" style="display:none">
   <div class="ctitle">➕ Tambah Memo / Surat Baru</div>
   <div class="nprev">
@@ -314,22 +226,10 @@ tbody td{padding:9px 12px;vertical-align:middle}
     <span id="prevTxt" style="color:var(--g400);font-weight:500;font-style:italic">Pilih tanggal untuk preview</span>
   </div>
   <div class="fgrid">
-    <div class="fg">
-      <label>Tanggal <span class="req">*</span></label>
-      <input type="date" id="fTgl"/>
-    </div>
-    <div class="fg">
-      <label>No. SR <span class="req">*</span></label>
-      <input type="text" id="fSR" placeholder="Cth: 340/SR/PBJP/VII/2026"/>
-    </div>
-    <div class="fg">
-      <label>No. PR <span style="color:var(--g400);font-weight:400">(opsional)</span></label>
-      <input type="text" id="fPR" placeholder="Cth: 2300036044"/>
-    </div>
-    <div class="fg full">
-      <label>Judul / Perihal <span class="req">*</span></label>
-      <input type="text" id="fJudul" placeholder="Cth: JASA PERBAIKAN POMPA P-101A" oninput="this.value=this.value.toUpperCase()"/>
-    </div>
+    <div class="fg"><label>Tanggal <span class="req">*</span></label><input type="date" id="fTgl"/></div>
+    <div class="fg"><label>No. SR <span class="req">*</span></label><input type="text" id="fSR" placeholder="Cth: 340/SR/PBJP/VII/2026"/></div>
+    <div class="fg"><label>No. PR <span style="color:var(--g400);font-weight:400">(opsional)</span></label><input type="text" id="fPR" placeholder="Cth: 2300036044"/></div>
+    <div class="fg full"><label>Judul / Perihal <span class="req">*</span></label><input type="text" id="fJudul" placeholder="Cth: JASA PERBAIKAN POMPA P-101A" oninput="this.value=this.value.toUpperCase()"/></div>
   </div>
   <div class="factions">
     <button class="btn btn-cancel" onclick="resetForm()">↺ Reset</button>
@@ -341,7 +241,7 @@ tbody td{padding:9px 12px;vertical-align:middle}
 <div class="card">
   <div class="ctitle">
     <span>📋 Daftar Surat</span>
-    <div style="display:flex;align-items:center;gap:8px">
+    <div style="display:flex;align-items:center;gap:7px">
       <button class="btn btn-upload" id="btnImport" onclick="document.getElementById('fImp').click()" style="display:none">📥 Import JSON</button>
       <input type="file" id="fImp" accept=".json" style="display:none" onchange="importJSON(event)"/>
       <button class="btn btn-upload" onclick="eksporJSON()">📤 Export JSON</button>
@@ -349,93 +249,69 @@ tbody td{padding:9px 12px;vertical-align:middle}
     </div>
   </div>
   <div class="ttbar">
-    <div class="sbox">
-      <span>🔍</span>
-      <input type="text" id="srch" placeholder="Cari nomor, judul, no. SR, no. PR..." oninput="renderTbl()"/>
-    </div>
-    <span style="font-size:.76rem;color:var(--g400)" id="ctInfo">—</span>
+    <div class="sbox"><span>🔍</span><input type="text" id="srch" placeholder="Cari nomor, judul, SR, PR..." oninput="renderTbl()"/></div>
+    <span style="font-size:.75rem;color:var(--g400)" id="ctInfo">—</span>
   </div>
   <div style="overflow-x:auto">
     <table>
       <thead><tr>
         <th style="width:30%">No. Surat</th>
         <th>Judul / Perihal</th>
-        <th style="width:95px">Tanggal</th>
-        <th style="width:90px;text-align:center" id="thAksi">Aksi</th>
+        <th style="width:92px">Tanggal</th>
+        <th style="width:95px;text-align:center">Aksi</th>
       </tr></thead>
       <tbody id="tBody"></tbody>
     </table>
   </div>
-  <div class="pagi">
-    <span id="pagiInfo" style="color:var(--g400)">—</span>
-    <div class="pbts" id="pagiBtn"></div>
-  </div>
+  <div class="pagi"><span id="pagiInfo" style="color:var(--g400)">—</span><div class="pbts" id="pagiBtn"></div></div>
 </div>
 </main>
 
-<!-- ══ MODAL: DETAIL ══ -->
+<!-- MODAL DETAIL -->
 <div class="overlay" id="ovDetail">
   <div class="modal">
-    <div class="mhdr">
-      <h2 id="mDetailTitle">📄 Detail Memo</h2>
-      <button class="mcls" onclick="closeModal('ovDetail')">✕</button>
-    </div>
+    <div class="mhdr"><h2>📄 Detail Memo</h2><button class="mcls" onclick="closeModal('ovDetail')">✕</button></div>
     <div class="mbody">
       <div class="dgrid" id="dGrid"></div>
       <hr class="divider">
-      <div style="display:flex;justify-content:flex-end;gap:8px" id="detailActions"></div>
+      <div style="display:flex;justify-content:flex-end;gap:7px" id="detailAct"></div>
     </div>
   </div>
 </div>
 
-<!-- ══ MODAL: EDIT ══ -->
+<!-- MODAL EDIT -->
 <div class="overlay" id="ovEdit">
   <div class="modal">
-    <div class="mhdr">
-      <h2>✏️ Edit Memo</h2>
-      <button class="mcls" onclick="closeModal('ovEdit')">✕</button>
-    </div>
+    <div class="mhdr"><h2>✏️ Edit Memo</h2><button class="mcls" onclick="closeModal('ovEdit')">✕</button></div>
     <div class="mbody">
-      <div class="nprev" style="margin-bottom:14px">
+      <div class="nprev" style="margin-bottom:12px">
         <span class="lbl">No. Surat:</span>
-        <span id="editNomorDisplay" style="font-weight:800;color:var(--gd)">—</span>
+        <span id="editNomor" style="font-weight:800;color:var(--gd)">—</span>
       </div>
       <div class="modal-fgrid">
-        <div class="fg">
-          <label>Tanggal <span class="req">*</span></label>
-          <input type="date" id="eTgl"/>
-        </div>
-        <div class="fg">
-          <label>No. SR <span class="req">*</span></label>
-          <input type="text" id="eSR" placeholder="No. SR Sumber"/>
-        </div>
-        <div class="fg">
-          <label>No. PR</label>
-          <input type="text" id="ePR" placeholder="No. PR (opsional)"/>
-        </div>
-        <div class="fg full">
-          <label>Judul / Perihal <span class="req">*</span></label>
-          <input type="text" id="eJudul" oninput="this.value=this.value.toUpperCase()"/>
-        </div>
+        <div class="fg"><label>Tanggal <span class="req">*</span></label><input type="date" id="eTgl"/></div>
+        <div class="fg"><label>No. SR <span class="req">*</span></label><input type="text" id="eSR"/></div>
+        <div class="fg"><label>No. PR</label><input type="text" id="ePR"/></div>
+        <div class="fg full"><label>Judul <span class="req">*</span></label><input type="text" id="eJudul" oninput="this.value=this.value.toUpperCase()"/></div>
       </div>
       <div class="factions">
         <button class="btn btn-cancel" onclick="closeModal('ovEdit')">Batal</button>
-        <button class="btn btn-primary" onclick="simpanEdit()">💾 Simpan Perubahan</button>
+        <button class="btn btn-primary" onclick="simpanEdit()">💾 Simpan</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══ MODAL: HAPUS ══ -->
+<!-- MODAL HAPUS MEMO -->
 <div class="overlay" id="ovHapus">
   <div class="modal sm">
     <div class="mhdr"><h2>⚠️ Konfirmasi Hapus</h2><button class="mcls" onclick="closeModal('ovHapus')">✕</button></div>
     <div class="mbody">
       <div class="del-box">
         <div class="ic">🗑️</div>
-        <p style="color:var(--g600);font-size:.86rem;margin-bottom:5px">Anda akan menghapus:</p>
-        <p style="margin:3px 0 8px"><strong id="hapusLbl" style="color:var(--gd)">—</strong></p>
-        <p style="color:var(--red);font-size:.78rem">Tidak dapat dibatalkan.</p>
+        <p style="color:var(--g600);font-size:.84rem;margin-bottom:4px">Hapus memo:</p>
+        <p><strong id="hapusLbl" style="color:var(--gd)">—</strong></p>
+        <p style="color:var(--red);font-size:.76rem;margin-top:7px">Tidak dapat dibatalkan.</p>
         <div class="del-actions">
           <button class="btn btn-cancel" onclick="closeModal('ovHapus')">Batal</button>
           <button class="btn btn-danger" onclick="hapusMemo()">Ya, Hapus</button>
@@ -445,22 +321,20 @@ tbody td{padding:9px 12px;vertical-align:middle}
   </div>
 </div>
 
-<!-- ══ MODAL: SETTINGS / KELOLA ══ -->
+<!-- MODAL SETTINGS -->
 <div class="overlay" id="ovSettings">
   <div class="modal lg">
     <div class="mhdr"><h2>⚙️ Kelola Aplikasi</h2><button class="mcls" onclick="closeModal('ovSettings')">✕</button></div>
     <div class="mbody">
 
-      <!-- USER MANAGEMENT -->
       <div class="setting-section">
         <h3>👥 Manajemen User</h3>
-        <div style="display:flex;justify-content:flex-end;margin-bottom:8px">
-          <button class="btn btn-primary" style="font-size:.78rem;padding:6px 12px" onclick="bukaAddUser()">➕ Tambah User</button>
+        <div style="display:flex;justify-content:flex-end;margin-bottom:7px">
+          <button class="btn btn-primary" style="font-size:.76rem;padding:5px 11px" onclick="bukaAddUser()">➕ Tambah User</button>
         </div>
         <table class="user-table" id="userTable"></table>
       </div>
 
-      <!-- GANTI PASSWORD SENDIRI -->
       <div class="setting-section">
         <h3>🔐 Ganti Password Saya</h3>
         <div class="setting-row">
@@ -482,19 +356,20 @@ tbody td{padding:9px 12px;vertical-align:middle}
         <button class="btn btn-primary" onclick="gantiPassword()">💾 Simpan Password</button>
       </div>
 
-      <!-- DATA -->
       <div class="setting-section">
-        <h3>🗄️ Data</h3>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-upload" onclick="eksporJSON()">📤 Export JSON</button>
-          <button class="btn btn-upload" onclick="eksporUsers()">📤 Export Users</button>
-          <button class="btn btn-upload" onclick="document.getElementById('fImpSettings').click()">📥 Import Memo JSON</button>
-          <input type="file" id="fImpSettings" accept=".json" style="display:none" onchange="importJSON(event)"/>
+        <h3>🗄️ Data & Backup</h3>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <button class="btn btn-upload" onclick="eksporJSON()">📤 Export db.json</button>
+          <button class="btn btn-upload" onclick="eksporUsers()">📤 Export users.json</button>
+          <button class="btn btn-upload" onclick="document.getElementById('fImpDB').click()">📥 Import db.json</button>
+          <input type="file" id="fImpDB" accept=".json" style="display:none" onchange="importJSON(event)"/>
+          <button class="btn btn-upload" onclick="document.getElementById('fImpUsers').click()">📥 Import users.json</button>
+          <input type="file" id="fImpUsers" accept=".json" style="display:none" onchange="importUsers(event)"/>
         </div>
-        <p class="hint" style="margin-top:7px">Export untuk backup. File JSON bisa diedit langsung lalu di-import kembali.</p>
+        <p class="hint" style="margin-top:7px">⚠️ Setelah import users.json, logout & login ulang agar perubahan aktif.</p>
         <div class="danger-zone">
           <h4>⚠️ Zona Berbahaya</h4>
-          <p>Hapus SELURUH data memo secara permanen. User tidak ikut terhapus.</p>
+          <p>Hapus SELURUH data memo. User tidak ikut terhapus.</p>
           <button class="btn btn-danger" onclick="bukaWipe()">🗑️ Wipe Data Memo</button>
         </div>
       </div>
@@ -503,23 +378,23 @@ tbody td{padding:9px 12px;vertical-align:middle}
   </div>
 </div>
 
-<!-- ══ MODAL: ADD USER ══ -->
+<!-- MODAL ADD USER -->
 <div class="overlay" id="ovAddUser">
   <div class="modal sm">
-    <div class="mhdr"><h2 id="addUserTitle">➕ Tambah User</h2><button class="mcls" onclick="closeModal('ovAddUser')">✕</button></div>
+    <div class="mhdr"><h2>➕ Tambah User</h2><button class="mcls" onclick="closeModal('ovAddUser')">✕</button></div>
     <div class="mbody">
       <div class="setting-row">
         <label>Username <span class="req">*</span></label>
-        <input type="text" id="auUser" placeholder="Username" oninput="this.value=this.value.toLowerCase().replace(/\s/g,'')"/>
-        <div class="auth-err" id="auUserErr">❌ Username sudah dipakai.</div>
+        <input type="text" id="auUser" placeholder="username (huruf kecil)" oninput="this.value=this.value.toLowerCase().replace(/\s/g,'')"/>
+        <div class="auth-err" id="auUserErr">❌ Username sudah ada.</div>
       </div>
       <div class="setting-row">
-        <label>Display Name <span class="req">*</span></label>
-        <input type="text" id="auName" placeholder="Nama tampilan"/>
+        <label>Nama Tampilan <span class="req">*</span></label>
+        <input type="text" id="auName" placeholder="Nama lengkap"/>
       </div>
       <div class="setting-row">
         <label>Role <span class="req">*</span></label>
-        <select id="auRole" style="border:1.5px solid var(--g300);border-radius:var(--rs);padding:8px 10px;font-size:.875rem;font-family:inherit;background:var(--g50);width:100%">
+        <select id="auRole">
           <option value="admin">Admin</option>
           <option value="superadmin">Super Admin</option>
         </select>
@@ -528,25 +403,25 @@ tbody td{padding:9px 12px;vertical-align:middle}
         <label>Password <span class="req">*</span></label>
         <div class="pw-wrap"><input type="password" id="auPass" placeholder="Password"/><button class="pw-toggle" onclick="togglePw('auPass',this)">👁️</button></div>
       </div>
-      <div class="auth-err" id="auErr" style="margin-bottom:8px">—</div>
+      <div class="auth-err" id="auErr" style="margin-bottom:8px"></div>
       <div class="factions" style="margin-top:6px">
         <button class="btn btn-cancel" onclick="closeModal('ovAddUser')">Batal</button>
-        <button class="btn btn-primary" id="btnSaveUser" onclick="simpanUser()">💾 Simpan User</button>
+        <button class="btn btn-primary" onclick="simpanUser()">💾 Simpan</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══ MODAL: HAPUS USER ══ -->
+<!-- MODAL HAPUS USER -->
 <div class="overlay" id="ovHapusUser">
   <div class="modal sm">
     <div class="mhdr"><h2>⚠️ Hapus User</h2><button class="mcls" onclick="closeModal('ovHapusUser')">✕</button></div>
     <div class="mbody">
       <div class="del-box">
         <div class="ic">👤</div>
-        <p style="color:var(--g600);font-size:.86rem;margin-bottom:5px">Hapus user:</p>
+        <p style="color:var(--g600);font-size:.84rem;margin-bottom:4px">Hapus user:</p>
         <p><strong id="hapusUserLbl" style="color:var(--gd)">—</strong></p>
-        <p style="color:var(--red);font-size:.78rem;margin-top:8px">Tidak dapat dibatalkan.</p>
+        <p style="color:var(--red);font-size:.76rem;margin-top:7px">Tidak dapat dibatalkan.</p>
         <div class="del-actions">
           <button class="btn btn-cancel" onclick="closeModal('ovHapusUser')">Batal</button>
           <button class="btn btn-danger" onclick="hapusUser()">Ya, Hapus</button>
@@ -556,45 +431,33 @@ tbody td{padding:9px 12px;vertical-align:middle}
   </div>
 </div>
 
-<!-- ══ MODAL: WIPE ══ -->
+<!-- MODAL WIPE -->
 <div class="overlay" id="ovWipe">
   <div class="modal sm">
     <div class="mhdr"><h2>☢️ Wipe Data</h2><button class="mcls" onclick="closeModal('ovWipe')">✕</button></div>
     <div class="mbody">
       <div id="wS1" class="wipe-step">
-        <div class="big-ic">⚠️</div>
-        <h3>PERINGATAN!</h3>
-        <p>Seluruh <strong id="wipeCt">0</strong> data memo akan dihapus permanen.<br><strong>Tidak bisa dikembalikan!</strong></p>
-        <div style="display:flex;gap:8px;margin-bottom:10px">
+        <div class="big-ic">⚠️</div><h3>PERINGATAN!</h3>
+        <p>Seluruh <strong id="wipeCt">0</strong> data memo akan dihapus permanen.</p>
+        <div style="display:flex;gap:7px;margin-bottom:9px">
           <button class="btn btn-upload" style="flex:1" onclick="eksporJSON()">📤 Export Dulu</button>
           <button class="btn btn-danger" style="flex:1" onclick="wipeGo2()">Lanjut →</button>
         </div>
         <button class="btn btn-cancel" style="width:100%" onclick="closeModal('ovWipe')">Batal</button>
       </div>
       <div id="wS2" class="wipe-step" style="display:none">
-        <div class="big-ic">🔐</div>
-        <h3>Verifikasi</h3>
-        <p>Masukkan password Anda untuk melanjutkan.</p>
-        <div class="pw-wrap" style="margin-bottom:9px">
-          <input type="password" id="wipePass" placeholder="Password..." onkeydown="if(event.key==='Enter')wipeGo3()"/>
-          <button class="pw-toggle" onclick="togglePw('wipePass',this)">👁️</button>
-        </div>
-        <div class="auth-err" id="wipeErr" style="margin-bottom:9px">❌ Password salah.</div>
-        <div style="display:flex;gap:8px">
-          <button class="btn btn-cancel" style="flex:1" onclick="wipeBack1()">← Kembali</button>
-          <button class="btn btn-danger" style="flex:1" onclick="wipeGo3()">Verifikasi →</button>
-        </div>
+        <div class="big-ic">🔐</div><h3>Verifikasi</h3>
+        <p>Masukkan password Anda.</p>
+        <div class="pw-wrap" style="margin-bottom:8px"><input type="password" id="wipePass" placeholder="Password..." onkeydown="if(event.key==='Enter')wipeGo3()"/><button class="pw-toggle" onclick="togglePw('wipePass',this)">👁️</button></div>
+        <div class="auth-err" id="wipeErr" style="margin-bottom:8px">❌ Password salah.</div>
+        <div style="display:flex;gap:7px"><button class="btn btn-cancel" style="flex:1" onclick="wipeBack1()">← Kembali</button><button class="btn btn-danger" style="flex:1" onclick="wipeGo3()">Verifikasi →</button></div>
       </div>
       <div id="wS3" class="wipe-step" style="display:none">
-        <div class="big-ic">💀</div>
-        <h3>Konfirmasi Final</h3>
-        <p>Ketik <strong>HAPUS SEMUA</strong> untuk konfirmasi:</p>
-        <input type="text" id="wipeConf" placeholder="HAPUS SEMUA" style="text-align:center;font-weight:700;letter-spacing:1px;margin-bottom:9px" oninput="cekWipeConf()" onkeydown="if(event.key==='Enter')doWipe()"/>
-        <div class="auth-err" id="wipeConErr" style="margin-bottom:9px">❌ Teks tidak cocok.</div>
-        <div style="display:flex;gap:8px">
-          <button class="btn btn-cancel" style="flex:1" onclick="wipeBack2()">← Kembali</button>
-          <button class="btn btn-danger" style="flex:1;opacity:.4" id="btnDoWipe" disabled onclick="doWipe()">🗑️ WIPE</button>
-        </div>
+        <div class="big-ic">💀</div><h3>Konfirmasi Final</h3>
+        <p>Ketik <strong>HAPUS SEMUA</strong>:</p>
+        <input type="text" id="wipeConf" placeholder="HAPUS SEMUA" style="text-align:center;font-weight:700;letter-spacing:1px;margin-bottom:8px" oninput="cekWipeConf()" onkeydown="if(event.key==='Enter')doWipe()"/>
+        <div class="auth-err" id="wipeConErr" style="margin-bottom:8px">❌ Teks tidak cocok.</div>
+        <div style="display:flex;gap:7px"><button class="btn btn-cancel" style="flex:1" onclick="wipeBack2()">← Kembali</button><button class="btn btn-danger" style="flex:1;opacity:.4" id="btnDoWipe" disabled onclick="doWipe()">🗑️ WIPE</button></div>
       </div>
     </div>
   </div>
@@ -604,91 +467,78 @@ tbody td{padding:9px 12px;vertical-align:middle}
 
 <script>
 'use strict';
-/* ══════════════════════════════════════════════
-   CRYPTO
-   ══════════════════════════════════════════════ */
+
+/* ══ CRYPTO ══ */
 async function sha256(s){
   const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));
   return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');
 }
 
-/* ══════════════════════════════════════════════
-   CONFIG — titik lokasi file JSON
-   Ganti path sesuai lokasi file Anda
-   ══════════════════════════════════════════════ */
-const CFG={
-  dbFile:   'db.json',
-  usersFile:'users.json',
-};
+/* ══════════════════════════════════════════
+   DATABASE — disimpan di localStorage
+   Format sama persis dengan file JSON eksternal
+   sehingga bisa export/import
+   ══════════════════════════════════════════ */
+const LS_DB    = 'memo_db_v1';
+const LS_USERS = 'memo_users_v1';
 
-/* ══════════════════════════════════════════════
-   STATE
-   ══════════════════════════════════════════════ */
-let DB      = {meta:{},records:[]};   // data memo
-let USERS   = {users:[]};             // data user
-let SESSION = null;                   // user yg login {id,username,role,displayName}
-let editId  = null;
-let hapusId = null;
+function lsGetDB(){
+  try{ return JSON.parse(localStorage.getItem(LS_DB))||null; }catch{return null;}
+}
+function lsGetUsers(){
+  try{ return JSON.parse(localStorage.getItem(LS_USERS))||null; }catch{return null;}
+}
+function lsSaveDB(d)   { localStorage.setItem(LS_DB,    JSON.stringify(d)); }
+function lsSaveUsers(u){ localStorage.setItem(LS_USERS, JSON.stringify(u)); }
+
+/* Working copies (di-load ke memori saat init) */
+let DB    = {meta:{version:'1.0',lastUpdated:'',totalRecords:0}, records:[]};
+let USERS = {users:[]};
+
+/* ══ STATE ══ */
+let SESSION     = null;
+let editId      = null;
+let hapusId     = null;
 let hapusUserId = null;
-let editUserId  = null;
-const PER   = 10;
-let page    = 1;
+let page        = 1;
+const PER       = 10;
 
-/* ══════════════════════════════════════════════
-   LOAD JSON FILES
-   ══════════════════════════════════════════════ */
-async function loadFiles(){
-  try{
-    const [dbRes, usersRes] = await Promise.all([
-      fetch(CFG.dbFile   +'?t='+Date.now()),
-      fetch(CFG.usersFile+'?t='+Date.now()),
-    ]);
-    DB    = await dbRes.json();
-    USERS = await usersRes.json();
-    // Pastikan structure benar
-    if(!Array.isArray(DB.records))    DB.records   = [];
-    if(!Array.isArray(USERS.users))   USERS.users  = [];
-  } catch(e){
-    // Jika file tidak ditemukan / error, mulai dari kosong
-    DB    = {meta:{version:'1.0',lastUpdated:new Date().toISOString()},records:[]};
-    USERS = {users:[]};
-    console.warn('⚠️ Gagal load file JSON:', e.message);
+/* ══════════════════════════════════════════
+   INIT
+   ══════════════════════════════════════════ */
+async function init(){
+  // Load DB
+  const savedDB = lsGetDB();
+  if(savedDB) DB = savedDB;
+
+  // Load Users
+  const savedUsers = lsGetUsers();
+  if(savedUsers){
+    USERS = savedUsers;
+  } else {
+    // Buat superadmin default: admin / aset1
+    const defHash = await sha256('aset1');
+    USERS = { users:[{
+      id:1, username:'admin', password:defHash,
+      role:'superadmin', displayName:'Super Administrator',
+      createdAt: new Date().toISOString()
+    }]};
+    lsSaveUsers(USERS);
   }
+
+  setToday();
+  showLogin();
 }
 
-/* ══════════════════════════════════════════════
-   EXPORT / DOWNLOAD helpers
-   (karena tidak bisa nulis file langsung dari browser,
-    semua perubahan di-download sebagai JSON baru)
-   ══════════════════════════════════════════════ */
-function downloadJSON(obj, filename){
-  const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);a.download=filename;a.click();
-  URL.revokeObjectURL(a.href);
-}
-
-function saveDB(){
-  DB.meta.lastUpdated=new Date().toISOString();
-  DB.meta.totalRecords=DB.records.length;
-  downloadJSON(DB,'db.json');
-  toast('💾 db.json diunduh — ganti file lama dengan ini.','ok');
-}
-
-function saveUsers(){
-  downloadJSON(USERS,'users.json');
-  toast('💾 users.json diunduh — ganti file lama dengan ini.','warn');
-}
-
-/* ══════════════════════════════════════════════
+/* ══════════════════════════════════════════
    AUTH
-   ══════════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 function showLogin(){
   document.getElementById('loginErr').style.display='none';
   document.getElementById('loginUser').value='';
   document.getElementById('loginPass').value='';
   document.getElementById('loginScreen').classList.add('on');
-  setTimeout(()=>document.getElementById('loginUser').focus(),200);
+  setTimeout(()=>document.getElementById('loginUser').focus(),250);
 }
 
 function loginAsGuest(){
@@ -698,72 +548,73 @@ function loginAsGuest(){
 }
 
 async function doLogin(){
-  const uname=document.getElementById('loginUser').value.trim().toLowerCase();
-  const pass =document.getElementById('loginPass').value;
-  const err  =document.getElementById('loginErr');
-  if(!uname||!pass){err.style.display='block';err.textContent='❌ Isi username dan password.';return;}
-  const user=USERS.users.find(u=>u.username===uname);
-  if(!user){err.style.display='block';err.textContent='❌ Username tidak ditemukan.';return;}
-  const h=await sha256(pass);
-  if(h!==user.password){err.style.display='block';err.textContent='❌ Password salah.';return;}
-  SESSION={id:user.id,username:user.username,role:user.role,displayName:user.displayName};
+  const uname = document.getElementById('loginUser').value.trim().toLowerCase();
+  const pass  = document.getElementById('loginPass').value;
+  const errEl = document.getElementById('loginErr');
+
+  if(!uname||!pass){
+    errEl.textContent='❌ Isi username dan password.';
+    errEl.style.display='block'; return;
+  }
+
+  const user = USERS.users.find(u=>u.username===uname);
+  if(!user){
+    errEl.textContent='❌ Username tidak ditemukan.';
+    errEl.style.display='block'; return;
+  }
+
+  const h = await sha256(pass);
+  if(h !== user.password){
+    errEl.textContent='❌ Password salah.';
+    errEl.style.display='block';
+    document.getElementById('loginPass').value='';
+    return;
+  }
+
+  SESSION = {id:user.id, username:user.username, role:user.role, displayName:user.displayName};
   document.getElementById('loginScreen').classList.remove('on');
   updateUI();
   toast(`👋 Selamat datang, ${SESSION.displayName}!`,'ok');
 }
 
 function doLogout(){
-  SESSION=null;updateUI();
+  SESSION=null; updateUI();
   toast('👋 Berhasil logout.','');
 }
 
-function isSuperAdmin(){ return SESSION&&SESSION.role==='superadmin'; }
-function isLoggedIn(){   return SESSION!==null; }
+const isLoggedIn  = ()=>SESSION!==null;
+const isSuperAdmin= ()=>SESSION&&SESSION.role==='superadmin';
 
-/* ══════════════════════════════════════════════
-   UPDATE UI berdasarkan SESSION
-   ══════════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   UPDATE UI
+   ══════════════════════════════════════════ */
 function updateUI(){
-  const logged=isLoggedIn();
-  const superA=isSuperAdmin();
-
-  // Header chips
+  const logged=isLoggedIn(), superA=isSuperAdmin();
   const chip=document.getElementById('userChip');
+
   if(logged){
-    const roleMap={superadmin:'Super Admin',admin:'Admin'};
-    chip.innerHTML=`
-      <div class="user-chip">
-        <div class="user-avatar">${SESSION.displayName.charAt(0).toUpperCase()}</div>
-        <div>
-          <div style="font-weight:600">${SESSION.displayName}</div>
-          <div class="user-role">${roleMap[SESSION.role]||SESSION.role}</div>
-        </div>
-      </div>`;
+    const roleLabel={superadmin:'Super Admin',admin:'Admin'}[SESSION.role]||SESSION.role;
+    chip.innerHTML=`<div class="user-chip">
+      <div class="user-avatar">${SESSION.displayName[0].toUpperCase()}</div>
+      <div><div style="font-weight:600;font-size:.78rem">${SESSION.displayName}</div>
+      <div class="user-role">${roleLabel}</div></div>
+    </div>`;
   } else {
     chip.innerHTML='<div class="guest-badge">👁️ Tamu</div>';
   }
 
-  // Buttons header
-  document.getElementById('btnSettings').style.display   = superA?'flex':'none';
-  document.getElementById('btnLogout').style.display     = logged?'flex':'none';
-  document.getElementById('btnLoginHeader').style.display= logged?'none':'flex';
-
-  // Notice bar
-  document.getElementById('noticeBar').className = 'notice-bar'+(logged?' hidden':'');
-
-  // Form card
-  document.getElementById('formCard').style.display = logged?'block':'none';
-
-  // Import button
-  document.getElementById('btnImport').style.display = logged?'inline-flex':'none';
-
-  // Re-render table (untuk update kolom aksi)
+  document.getElementById('btnSettings').style.display = superA?'flex':'none';
+  document.getElementById('btnLogout').style.display   = logged?'flex':'none';
+  document.getElementById('btnLoginHdr').style.display = logged?'none':'flex';
+  document.getElementById('noticeBar').className        = 'notice-bar'+(logged?' hidden':'');
+  document.getElementById('formCard').style.display    = logged?'block':'none';
+  document.getElementById('btnImport').style.display   = logged?'inline-flex':'none';
   renderTbl();
 }
 
-/* ══════════════════════════════════════════════
+/* ══════════════════════════════════════════
    UTILS
-   ══════════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 const ROM=['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];
 const toRom=d=>ROM[d.getMonth()];
 const fmtTgl=iso=>{if(!iso||iso.length<8)return'—';const[y,m,d]=iso.split('-');return`${d}/${m}/${y}`};
@@ -776,54 +627,63 @@ function buatNomor(tgl){
   const d=new Date(tgl+'T00:00:00');
   return`${nextPPBJE()}/PPBJE/D2350/${toRom(d)}/${d.getFullYear()}`;
 }
-
-/* ══════════════════════════════════════════════
-   PREVIEW
-   ══════════════════════════════════════════════ */
+function setToday(){
+  document.getElementById('fTgl').value=new Date().toISOString().split('T')[0];
+  updatePreview();
+}
 function updatePreview(){
-  const tgl=document.getElementById('fTgl').value,el=document.getElementById('prevTxt');
+  const tgl=document.getElementById('fTgl').value, el=document.getElementById('prevTxt');
   if(!tgl){el.textContent='Pilih tanggal untuk preview';el.style.cssText='color:var(--g400);font-style:italic';return;}
   el.textContent=buatNomor(tgl);el.style.cssText='color:var(--gd);font-weight:800;font-style:normal';
 }
 document.getElementById('fTgl').addEventListener('change',updatePreview);
 
-/* ══════════════════════════════════════════════
-   FORM — SIMPAN
-   ══════════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   SIMPAN MEMO BARU
+   ══════════════════════════════════════════ */
 function simpan(){
   if(!isLoggedIn()){toast('⚠️ Login dulu!','warn');return;}
-  const tgl=document.getElementById('fTgl').value.trim();
-  const sr =document.getElementById('fSR').value.trim();
-  const pr =document.getElementById('fPR').value.trim();
+  const tgl  =document.getElementById('fTgl').value.trim();
+  const sr   =document.getElementById('fSR').value.trim();
+  const pr   =document.getElementById('fPR').value.trim();
   const judul=document.getElementById('fJudul').value.trim();
   if(!tgl||!judul||!sr){toast('Tanggal, No. SR, dan Judul wajib diisi!','err');return;}
   const rec={
-    id:Date.now(),nomor:buatNomor(tgl),judul,tanggal:tgl,
-    noSR:sr,noPR:pr,createdAt:new Date().toISOString(),
-    createdBy:SESSION.username,
+    id:Date.now(), nomor:buatNomor(tgl), judul, tanggal:tgl,
+    noSR:sr, noPR:pr, createdAt:new Date().toISOString(), createdBy:SESSION.username
   };
   DB.records.push(rec);
-  saveDB();
+  persistDB();
   resetForm();
-  toast(`✅ Memo disimpan: ${rec.nomor}. Download db.json & ganti file lama.`,'ok');
-  page=1;renderTbl();
+  toast(`✅ Memo disimpan: ${rec.nomor}`,'ok');
+  page=1; renderTbl();
 }
 
 function resetForm(){
-  document.getElementById('fSR').value='';
-  document.getElementById('fPR').value='';
-  document.getElementById('fJudul').value='';
+  ['fSR','fPR','fJudul'].forEach(id=>document.getElementById(id).value='');
   setToday();
 }
 
-/* ══════════════════════════════════════════════
+/* ══════════════════════════════════════════
+   PERSIST — simpan ke localStorage DAN
+   langsung download JSON (untuk update file eksternal)
+   ══════════════════════════════════════════ */
+function persistDB(){
+  DB.meta.lastUpdated   = new Date().toISOString();
+  DB.meta.totalRecords  = DB.records.length;
+  lsSaveDB(DB);
+}
+function persistUsers(){
+  lsSaveUsers(USERS);
+}
+
+/* ══════════════════════════════════════════
    TABLE
-   ══════════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 function getFiltered(){
   const q=document.getElementById('srch').value.toLowerCase();
-  const data=[...DB.records];
-  data.sort((a,b)=>{
-    const na=parseInt(a.nomor)||0,nb=parseInt(b.nomor)||0;
+  const data=[...DB.records].sort((a,b)=>{
+    const na=parseInt(a.nomor)||0, nb=parseInt(b.nomor)||0;
     if(nb!==na)return nb-na;
     return new Date(b.createdAt)-new Date(a.createdAt);
   });
@@ -835,44 +695,42 @@ function getFiltered(){
     (m.noPR||'').toLowerCase().includes(q)
   );
 }
-
 function renderTbl(){
-  const f=getFiltered(),total=f.length,pages=Math.ceil(total/PER)||1;
+  const f=getFiltered(), total=f.length, pages=Math.ceil(total/PER)||1;
   if(page>pages)page=pages;
-  const start=(page-1)*PER,slice=f.slice(start,start+PER);
+  const start=(page-1)*PER, slice=f.slice(start,start+PER);
   document.getElementById('bdgCt').textContent=DB.records.length;
-  document.getElementById('ctInfo').textContent=total?`${start+1}–${Math.min(start+PER,total)} dari ${total} data`:'—';
+  document.getElementById('ctInfo').textContent=total?`${start+1}–${Math.min(start+PER,total)} dari ${total}`:'—';
   const tb=document.getElementById('tBody');
   if(!slice.length){
-    tb.innerHTML=`<tr><td colspan="4" class="no-data">${total?'Tidak ada hasil.':'Belum ada data. Import db.json untuk mulai.'}</td></tr>`;
+    tb.innerHTML=`<tr><td colspan="4" class="no-data">${total?'Tidak ada hasil.':'Belum ada data — Import db.json untuk mulai.'}</td></tr>`;
     renderPagi(pages,total);return;
   }
   const logged=isLoggedIn();
   tb.innerHTML=slice.map(m=>`<tr>
     <td class="tc-no">${m.nomor}</td>
-    <td style="color:var(--g700);font-size:.82rem">${m.judul}</td>
+    <td style="color:var(--g700);font-size:.81rem">${m.judul}</td>
     <td class="tc-dt">${fmtTgl(m.tanggal)}</td>
     <td style="text-align:center">
       ${logged
-        ?`<div style="display:flex;gap:4px;justify-content:center">
-            <button class="btn btn-detail" onclick="bukaDetail(${m.id})">👁</button>
-            <button class="btn btn-edit"   onclick="bukaEdit(${m.id})">✏️</button>
-            <button class="btn btn-danger" onclick="konfirmHapus(${m.id})">🗑</button>
+        ?`<div style="display:flex;gap:3px;justify-content:center">
+            <button class="btn btn-detail" title="Detail" onclick="bukaDetail(${m.id})">👁</button>
+            <button class="btn btn-edit"   title="Edit"   onclick="bukaEdit(${m.id})">✏️</button>
+            <button class="btn btn-danger" title="Hapus"  onclick="konfirmHapus(${m.id})">🗑</button>
           </div>`
-        :`<span style="font-size:.72rem;color:var(--g400)">— Login —</span>`
+        :`<span style="font-size:.7rem;color:var(--g400)">Login dulu</span>`
       }
     </td>
   </tr>`).join('');
   renderPagi(pages,total);
 }
-
 function renderPagi(pages,total){
   const info=document.getElementById('pagiInfo'),btns=document.getElementById('pagiBtn');
   if(!total){info.textContent='';btns.innerHTML='';return;}
   info.textContent=`Hal. ${page}/${pages}`;
   let h=`<button class="pbtn" onclick="goPage(${page-1})" ${page===1?'disabled':''}>‹</button>`;
   for(let i=1;i<=pages;i++){
-    if(pages>7&&Math.abs(i-page)>2&&i!==1&&i!==pages){if(i===2||i===pages-1)h+=`<span style="padding:4px 3px;color:var(--g400)">…</span>`;continue;}
+    if(pages>7&&Math.abs(i-page)>2&&i!==1&&i!==pages){if(i===2||i===pages-1)h+=`<span style="padding:4px 2px;color:var(--g400)">…</span>`;continue;}
     h+=`<button class="pbtn ${i===page?'active':''}" onclick="goPage(${i})">${i}</button>`;
   }
   h+=`<button class="pbtn" onclick="goPage(${page+1})" ${page===pages?'disabled':''}>›</button>`;
@@ -880,67 +738,59 @@ function renderPagi(pages,total){
 }
 function goPage(p){page=p;renderTbl();}
 
-/* ══════════════════════════════════════════════
+/* ══════════════════════════════════════════
    DETAIL
-   ══════════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 function bukaDetail(id){
-  if(!isLoggedIn()){toast('⚠️ Login untuk melihat detail.','warn');return;}
-  const m=DB.records.find(x=>x.id==id);
-  if(!m){toast('Data tidak ditemukan.','err');return;}
-  document.getElementById('mDetailTitle').textContent='📄 Detail Memo';
+  if(!isLoggedIn()){toast('⚠️ Login untuk lihat detail.','warn');return;}
+  const m=DB.records.find(x=>x.id==id); if(!m)return;
   document.getElementById('dGrid').innerHTML=`
     <div class="drow"><div class="dkey">No. Surat</div><div class="dval nm">${m.nomor}</div></div>
     <div class="drow"><div class="dkey">Tanggal</div><div class="dval">${fmtTgl(m.tanggal)}</div></div>
     <div class="drow"><div class="dkey">Judul</div><div class="dval">${m.judul}</div></div>
     <div class="drow"><div class="dkey">No. SR</div><div class="dval">${m.noSR||'—'}</div></div>
     <div class="drow"><div class="dkey">No. PR</div><div class="dval">${m.noPR||'—'}</div></div>
-    <div class="drow"><div class="dkey">Dibuat</div><div class="dval" style="font-size:.77rem;color:var(--g400)">${new Date(m.createdAt).toLocaleString('id-ID')} ${m.createdBy?'· oleh '+m.createdBy:''}</div></div>
-    ${m.updatedAt?`<div class="drow"><div class="dkey">Diubah</div><div class="dval" style="font-size:.77rem;color:var(--g400)">${new Date(m.updatedAt).toLocaleString('id-ID')} ${m.updatedBy?'· oleh '+m.updatedBy:''}</div></div>`:''}
-  `;
-  document.getElementById('detailActions').innerHTML=`
+    <div class="drow"><div class="dkey">Dibuat</div><div class="dval" style="font-size:.75rem;color:var(--g400)">${new Date(m.createdAt).toLocaleString('id-ID')}${m.createdBy?' · '+m.createdBy:''}</div></div>
+    ${m.updatedAt?`<div class="drow"><div class="dkey">Diubah</div><div class="dval" style="font-size:.75rem;color:var(--g400)">${new Date(m.updatedAt).toLocaleString('id-ID')}${m.updatedBy?' · '+m.updatedBy:''}</div></div>`:''}`;
+  document.getElementById('detailAct').innerHTML=`
     <button class="btn btn-edit" onclick="closeModal('ovDetail');bukaEdit(${m.id})">✏️ Edit</button>
-    <button class="btn btn-danger" onclick="closeModal('ovDetail');konfirmHapus(${m.id})">🗑️ Hapus</button>
-  `;
+    <button class="btn btn-danger" onclick="closeModal('ovDetail');konfirmHapus(${m.id})">🗑️ Hapus</button>`;
   openModal('ovDetail');
 }
 
-/* ══════════════════════════════════════════════
+/* ══════════════════════════════════════════
    EDIT
-   ══════════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 function bukaEdit(id){
-  if(!isLoggedIn()){toast('⚠️ Login dulu!','warn');return;}
-  const m=DB.records.find(x=>x.id==id);
-  if(!m)return;
+  if(!isLoggedIn())return;
+  const m=DB.records.find(x=>x.id==id); if(!m)return;
   editId=id;
-  document.getElementById('editNomorDisplay').textContent=m.nomor;
-  document.getElementById('eTgl').value=m.tanggal||'';
-  document.getElementById('eSR').value=m.noSR||'';
-  document.getElementById('ePR').value=m.noPR||'';
+  document.getElementById('editNomor').textContent=m.nomor;
+  document.getElementById('eTgl').value  =m.tanggal||'';
+  document.getElementById('eSR').value   =m.noSR||'';
+  document.getElementById('ePR').value   =m.noPR||'';
   document.getElementById('eJudul').value=m.judul||'';
   openModal('ovEdit');
 }
-
 function simpanEdit(){
   if(!isLoggedIn())return;
-  const tgl=document.getElementById('eTgl').value.trim();
-  const sr =document.getElementById('eSR').value.trim();
-  const pr =document.getElementById('ePR').value.trim();
+  const tgl  =document.getElementById('eTgl').value.trim();
+  const sr   =document.getElementById('eSR').value.trim();
+  const pr   =document.getElementById('ePR').value.trim();
   const judul=document.getElementById('eJudul').value.trim();
   if(!tgl||!judul||!sr){toast('Semua field wajib diisi!','err');return;}
-  const idx=DB.records.findIndex(x=>x.id==editId);
-  if(idx<0)return;
-  DB.records[idx]={...DB.records[idx],judul,tanggal:tgl,noSR:sr,noPR:pr,updatedAt:new Date().toISOString(),updatedBy:SESSION.username};
-  saveDB();
-  closeModal('ovEdit');
-  toast('✅ Memo diperbarui. Download db.json & ganti file lama.','ok');
-  renderTbl();
+  const idx=DB.records.findIndex(x=>x.id==editId); if(idx<0)return;
+  DB.records[idx]={...DB.records[idx],judul,tanggal:tgl,noSR:sr,noPR:pr,
+    updatedAt:new Date().toISOString(),updatedBy:SESSION.username};
+  persistDB(); closeModal('ovEdit');
+  toast('✅ Memo diperbarui.','ok'); renderTbl();
 }
 
-/* ══════════════════════════════════════════════
+/* ══════════════════════════════════════════
    HAPUS MEMO
-   ══════════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 function konfirmHapus(id){
-  if(!isLoggedIn()){toast('⚠️ Login dulu!','warn');return;}
+  if(!isLoggedIn())return;
   hapusId=id;
   const m=DB.records.find(x=>x.id==id);
   document.getElementById('hapusLbl').textContent=m?m.nomor:'—';
@@ -948,21 +798,20 @@ function konfirmHapus(id){
 }
 function hapusMemo(){
   DB.records=DB.records.filter(m=>m.id!=hapusId);
-  saveDB();closeModal('ovHapus');
-  toast('🗑️ Memo dihapus. Download db.json & ganti file lama.','warn');renderTbl();
+  persistDB(); closeModal('ovHapus');
+  toast('🗑️ Memo dihapus.','warn'); renderTbl();
 }
 
-/* ══════════════════════════════════════════════
-   IMPORT JSON MEMO
-   ══════════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   IMPORT / EXPORT MEMO
+   ══════════════════════════════════════════ */
 function importJSON(e){
-  const file=e.target.files[0];if(!file)return;e.target.value='';
+  const file=e.target.files[0]; if(!file)return; e.target.value='';
   if(!isLoggedIn()){toast('⚠️ Login dulu!','warn');return;}
   const fr=new FileReader();
   fr.onload=ev=>{
     try{
       const parsed=JSON.parse(ev.target.result);
-      // Support format: array langsung, atau {records:[...]}
       let imported=Array.isArray(parsed)?parsed:(parsed.records||[]);
       imported=imported.map((r,i)=>({
         id:r.id||Date.now()+i,
@@ -974,77 +823,91 @@ function importJSON(e){
         createdAt:r.createdAt||new Date().toISOString(),
         createdBy:r.createdBy||'import',
       })).filter(r=>r.nomor||r.judul);
-      const exIds=new Set(DB.records.map(e=>e.id));
+      const exIds=new Set(DB.records.map(x=>x.id));
       const added=imported.filter(r=>!exIds.has(r.id));
       DB.records=[...DB.records,...added];
-      saveDB();
-      toast(`✅ ${added.length} data diimport. Download & ganti db.json.`,'ok');
-      renderTbl();closeModal('ovSettings');
-    }catch(err){toast('❌ Format JSON tidak valid: '+err.message,'err');}
+      persistDB();
+      toast(`✅ ${added.length} data berhasil diimport.`,'ok');
+      renderTbl(); closeModal('ovSettings');
+    }catch(err){toast('❌ Format tidak valid: '+err.message,'err');}
   };
   fr.readAsText(file);
 }
 
-/* ══════════════════════════════════════════════
-   EXPORT
-   ══════════════════════════════════════════════ */
 function eksporJSON(){
-  downloadJSON(DB,`db-backup-${new Date().toISOString().slice(0,10)}.json`);
-  toast('📤 Backup db.json diunduh.','ok');
+  const blob=new Blob([JSON.stringify(DB,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`db-backup-${new Date().toISOString().slice(0,10)}.json`;
+  a.click(); URL.revokeObjectURL(a.href);
+  toast('📤 db.json diunduh.','ok');
 }
+
+/* ══════════════════════════════════════════
+   IMPORT / EXPORT USERS
+   ══════════════════════════════════════════ */
+function importUsers(e){
+  const file=e.target.files[0]; if(!file)return; e.target.value='';
+  if(!isSuperAdmin()){toast('⚠️ Akses ditolak.','err');return;}
+  const fr=new FileReader();
+  fr.onload=ev=>{
+    try{
+      const parsed=JSON.parse(ev.target.result);
+      if(!parsed.users||!Array.isArray(parsed.users))throw new Error('Format tidak valid');
+      USERS=parsed;
+      persistUsers();
+      toast('✅ users.json diimport. Logout & login ulang.','ok');
+      renderUserTable(); closeModal('ovSettings');
+    }catch(err){toast('❌ '+err.message,'err');}
+  };
+  fr.readAsText(file);
+}
+
 function eksporUsers(){
   if(!isSuperAdmin()){toast('⚠️ Akses ditolak.','err');return;}
-  downloadJSON(USERS,'users.json');
+  const blob=new Blob([JSON.stringify(USERS,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='users.json';
+  a.click(); URL.revokeObjectURL(a.href);
   toast('📤 users.json diunduh.','ok');
 }
 
-/* ══════════════════════════════════════════════
+/* ══════════════════════════════════════════
    SETTINGS
-   ══════════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 function bukaSettings(){
   if(!isSuperAdmin()){toast('⚠️ Akses ditolak.','err');return;}
   renderUserTable();
   ['oldPw','newPw','confPw'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('oldPwErr').style.display='none';
-  document.getElementById('confPwErr').style.display='none';
+  ['oldPwErr','confPwErr'].forEach(id=>document.getElementById(id).style.display='none');
   document.getElementById('sFill').style.cssText='width:0%';
   document.getElementById('sTxt').textContent='';
   openModal('ovSettings');
 }
-
 function renderUserTable(){
-  const t=document.getElementById('userTable');
-  t.innerHTML=`
-    <thead><tr>
-      <th>Username</th><th>Display Name</th><th>Role</th><th style="text-align:center">Aksi</th>
-    </tr></thead>
-    <tbody>${USERS.users.map(u=>`
-      <tr>
-        <td><code style="font-size:.8rem">${u.username}</code></td>
-        <td>${u.displayName}</td>
-        <td><span class="role-badge role-${u.role}">${u.role}</span></td>
-        <td style="text-align:center">
-          ${u.username==='admin'
-            ?'<span style="font-size:.72rem;color:var(--g400)">Protected</span>'
-            :`<button class="btn btn-danger" onclick="konfirmHapusUser(${u.id})">🗑</button>`
-          }
-        </td>
-      </tr>`).join('')}
-    </tbody>`;
+  document.getElementById('userTable').innerHTML=`
+    <thead><tr><th>Username</th><th>Nama</th><th>Role</th><th style="text-align:center">Aksi</th></tr></thead>
+    <tbody>${USERS.users.map(u=>`<tr>
+      <td><code style="font-size:.78rem">${u.username}</code></td>
+      <td>${u.displayName}</td>
+      <td><span class="role-badge role-${u.role}">${u.role}</span></td>
+      <td style="text-align:center">${u.username==='admin'
+        ?'<span style="font-size:.7rem;color:var(--g400)">Protected</span>'
+        :`<button class="btn btn-danger" style="font-size:.72rem;padding:3px 8px" onclick="konfirmHapusUser(${u.id})">🗑</button>`
+      }</td>
+    </tr>`).join('')}</tbody>`;
 }
 
-/* ══════════════════════════════════════════════
+/* ══════════════════════════════════════════
    USER MANAGEMENT
-   ══════════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 function bukaAddUser(){
   ['auUser','auName','auPass'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('auRole').value='admin';
-  document.getElementById('auUserErr').style.display='none';
-  document.getElementById('auErr').style.display='none';
-  document.getElementById('addUserTitle').textContent='➕ Tambah User';
+  ['auUserErr','auErr'].forEach(id=>document.getElementById(id).style.display='none');
   openModal('ovAddUser');
 }
-
 async function simpanUser(){
   const uname=document.getElementById('auUser').value.trim().toLowerCase();
   const name =document.getElementById('auName').value.trim();
@@ -1052,18 +915,14 @@ async function simpanUser(){
   const pass =document.getElementById('auPass').value;
   const uErr =document.getElementById('auUserErr');
   const aErr =document.getElementById('auErr');
-  uErr.style.display='none';aErr.style.display='none';
+  uErr.style.display='none'; aErr.style.display='none';
   if(!uname||!name||!pass){aErr.textContent='❌ Semua field wajib diisi.';aErr.style.display='block';return;}
   if(USERS.users.find(u=>u.username===uname)){uErr.style.display='block';return;}
-  const hash=await sha256(pass);
-  const newUser={id:Date.now(),username:uname,password:hash,role,displayName:name,createdAt:new Date().toISOString()};
-  USERS.users.push(newUser);
-  saveUsers();
-  closeModal('ovAddUser');
-  renderUserTable();
-  toast(`✅ User "${uname}" ditambahkan. Download & ganti users.json.`,'ok');
+  USERS.users.push({id:Date.now(),username:uname,password:await sha256(pass),role,displayName:name,createdAt:new Date().toISOString()});
+  persistUsers();
+  closeModal('ovAddUser'); renderUserTable();
+  toast(`✅ User "${uname}" ditambahkan.`,'ok');
 }
-
 function konfirmHapusUser(id){
   hapusUserId=id;
   const u=USERS.users.find(x=>x.id==id);
@@ -1072,53 +931,49 @@ function konfirmHapusUser(id){
 }
 function hapusUser(){
   const u=USERS.users.find(x=>x.id==hapusUserId);
-  if(u&&u.username==='admin'){toast('⚠️ Superadmin tidak bisa dihapus.','warn');closeModal('ovHapusUser');return;}
+  if(u?.username==='admin'){toast('⚠️ Superadmin tidak bisa dihapus.','warn');closeModal('ovHapusUser');return;}
   USERS.users=USERS.users.filter(x=>x.id!=hapusUserId);
-  saveUsers();closeModal('ovHapusUser');
-  renderUserTable();
-  toast('🗑️ User dihapus. Download & ganti users.json.','warn');
+  persistUsers(); closeModal('ovHapusUser');
+  renderUserTable(); toast('🗑️ User dihapus.','warn');
 }
 
-/* ══════════════════════════════════════════════
-   GANTI PASSWORD SENDIRI
-   ══════════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   GANTI PASSWORD
+   ══════════════════════════════════════════ */
 async function gantiPassword(){
   if(!isLoggedIn())return;
   const oldP=document.getElementById('oldPw').value;
   const newP=document.getElementById('newPw').value;
   const conP=document.getElementById('confPw').value;
-  const oErr=document.getElementById('oldPwErr');
-  const cErr=document.getElementById('confPwErr');
-  oErr.style.display='none';cErr.style.display='none';
+  document.getElementById('oldPwErr').style.display='none';
+  document.getElementById('confPwErr').style.display='none';
   if(!newP){toast('Password baru tidak boleh kosong!','err');return;}
-  if(newP!==conP){cErr.style.display='block';return;}
-  const oldHash=await sha256(oldP);
+  if(newP!==conP){document.getElementById('confPwErr').style.display='block';return;}
   const user=USERS.users.find(u=>u.username===SESSION.username);
-  if(!user||oldHash!==user.password){oErr.style.display='block';return;}
+  if(!user||await sha256(oldP)!==user.password){document.getElementById('oldPwErr').style.display='block';return;}
   user.password=await sha256(newP);
-  saveUsers();
-  toast('✅ Password diubah. Download & ganti users.json.','ok');
+  persistUsers();
   ['oldPw','newPw','confPw'].forEach(id=>document.getElementById(id).value='');
+  toast('✅ Password berhasil diubah.','ok');
 }
-
 function cekStrength(){
   const v=document.getElementById('newPw').value;
   let s=0;
   if(v.length>=8)s++;if(v.length>=12)s++;if(/[A-Z]/.test(v))s++;if(/[0-9]/.test(v))s++;if(/[^A-Za-z0-9]/.test(v))s++;
   const lv=[{w:'0%',c:'var(--g200)',t:''},{w:'20%',c:'#ef4444',t:'Sangat lemah'},{w:'40%',c:'#f97316',t:'Lemah'},{w:'60%',c:'#f59e0b',t:'Cukup'},{w:'80%',c:'#84cc16',t:'Kuat'},{w:'100%',c:'#22c55e',t:'Sangat kuat'}][Math.min(s,5)];
-  document.getElementById('sFill').style.width=lv.w;document.getElementById('sFill').style.background=lv.c;
-  document.getElementById('sTxt').textContent=lv.t;document.getElementById('sTxt').style.color=lv.c;
+  document.getElementById('sFill').style.width=lv.w;
+  document.getElementById('sFill').style.background=lv.c;
+  document.getElementById('sTxt').textContent=lv.t;
+  document.getElementById('sTxt').style.color=lv.c;
 }
 
-/* ══════════════════════════════════════════════
+/* ══════════════════════════════════════════
    WIPE
-   ══════════════════════════════════════════════ */
+   ══════════════════════════════════════════ */
 function bukaWipe(){
   closeModal('ovSettings');
   document.getElementById('wipeCt').textContent=DB.records.length;
-  document.getElementById('wS1').style.display='block';
-  document.getElementById('wS2').style.display='none';
-  document.getElementById('wS3').style.display='none';
+  ['wS1','wS2','wS3'].forEach((id,i)=>document.getElementById(id).style.display=i===0?'block':'none');
   openModal('ovWipe');
 }
 function wipeGo2(){
@@ -1130,79 +985,52 @@ function wipeGo2(){
 }
 function wipeBack1(){document.getElementById('wS2').style.display='none';document.getElementById('wS1').style.display='block';}
 async function wipeGo3(){
-  const h=await sha256(document.getElementById('wipePass').value);
   const user=USERS.users.find(u=>u.username===SESSION.username);
+  const h=await sha256(document.getElementById('wipePass').value);
   if(!user||h!==user.password){document.getElementById('wipeErr').style.display='block';document.getElementById('wipePass').value='';return;}
   document.getElementById('wipeErr').style.display='none';
   document.getElementById('wS2').style.display='none';
   document.getElementById('wS3').style.display='block';
   document.getElementById('wipeConf').value='';
   document.getElementById('wipeConErr').style.display='none';
-  document.getElementById('btnDoWipe').disabled=true;
-  document.getElementById('btnDoWipe').style.opacity='.4';
+  const btn=document.getElementById('btnDoWipe');btn.disabled=true;btn.style.opacity='.4';
   setTimeout(()=>document.getElementById('wipeConf').focus(),200);
 }
 function wipeBack2(){document.getElementById('wS3').style.display='none';document.getElementById('wS2').style.display='block';document.getElementById('wipePass').value='';}
 function cekWipeConf(){
   const ok=document.getElementById('wipeConf').value==='HAPUS SEMUA';
-  document.getElementById('btnDoWipe').disabled=!ok;
-  document.getElementById('btnDoWipe').style.opacity=ok?'1':'.4';
+  const btn=document.getElementById('btnDoWipe');btn.disabled=!ok;btn.style.opacity=ok?'1':'.4';
 }
 function doWipe(){
   if(document.getElementById('wipeConf').value!=='HAPUS SEMUA'){document.getElementById('wipeConErr').style.display='block';return;}
-  DB.records=[];DB.meta.totalRecords=0;DB.meta.lastUpdated=new Date().toISOString();
-  saveDB();closeModal('ovWipe');
-  toast('💥 Semua data dihapus. Download db.json baru.','err');renderTbl();
+  DB.records=[];persistDB();closeModal('ovWipe');
+  toast('💥 Semua data memo dihapus.','err');renderTbl();
 }
 
-/* ══════════════════════════════════════════════
-   MODAL & MISC HELPERS
-   ══════════════════════════════════════════════ */
-function togglePw(id,btn){const el=document.getElementById(id);const s=el.type==='password';el.type=s?'text':'password';btn.textContent=s?'🙈':'👁️';}
+/* ══════════════════════════════════════════
+   HELPERS
+   ══════════════════════════════════════════ */
+function togglePw(id,btn){
+  const el=document.getElementById(id);
+  el.type=el.type==='password'?'text':'password';
+  btn.textContent=el.type==='password'?'👁️':'🙈';
+}
 function openModal(id){document.getElementById(id).classList.add('on')}
 function closeModal(id){document.getElementById(id).classList.remove('on')}
-
 ['ovDetail','ovEdit','ovHapus','ovSettings','ovAddUser','ovHapusUser','ovWipe'].forEach(id=>{
   document.getElementById(id).addEventListener('click',function(e){if(e.target===this)closeModal(id)});
 });
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape')['ovDetail','ovEdit','ovHapus','ovSettings','ovAddUser','ovHapusUser','ovWipe'].forEach(closeModal);
 });
-
 function toast(msg,type=''){
   const c=document.getElementById('tcWrap'),t=document.createElement('div');
   t.className=`toast ${type}`;t.textContent=msg;c.appendChild(t);
-  setTimeout(()=>t.remove(),4200);
+  setTimeout(()=>t.remove(),4000);
 }
 
-function setToday(){
-  document.getElementById('fTgl').value=new Date().toISOString().split('T')[0];
-  updatePreview();
-}
-
-/* ══════════════════════════════════════════════
-   INIT
-   ══════════════════════════════════════════════ */
-(async function init(){
-  await loadFiles();
-
-  // Jika users.json kosong / tidak ada user sama sekali, buat superadmin default
-  if(USERS.users.length===0){
-    const defHash=await sha256('aset1');
-    USERS.users=[{
-      id:1,username:'admin',password:defHash,
-      role:'superadmin',displayName:'Super Administrator',
-      createdAt:'2026-01-01T00:00:00.000Z'
-    }];
-    // Auto-download users.json awal
-    downloadJSON(USERS,'users.json');
-    toast('⚠️ users.json dibuat otomatis — simpan file tersebut!','warn');
-  }
-
-  setToday();
-  showLogin(); // tampilkan login screen saat pertama buka
-  updateUI();
-})();
+/* ══ START ══ */
+init();
 </script>
 </body>
 </html>
